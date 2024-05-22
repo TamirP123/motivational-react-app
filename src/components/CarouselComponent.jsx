@@ -18,8 +18,8 @@ const CarouselComponent = () => {
           />
           <Carousel.Caption>
           <h2 class="bg-dark bg-opacity-50 py-2 px-4">The difference between successful people and unsuccessful people is the willingness to do what others won’t.</h2>
-        <a href="#" class="btn btn-outline-light px-4 py-2 rounded-0">Learn More</a>
-          </Carousel.Caption>
+          <div class="icon" href="#target-content"></div>
+                    </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
         <div className="overlay"></div>
@@ -30,8 +30,8 @@ const CarouselComponent = () => {
           />
           <Carousel.Caption>
           <h2 class="bg-dark bg-opacity-50 py-2 px-4">You’ve been given another day of life. How will you use it? Will you wait until tomorrow as you’ve done for years or decide today is the day you commit to excellence?</h2>
-        <a href="#" class="btn btn-outline-light px-4 py-2 rounded-0">Learn More</a>
-          </Carousel.Caption>
+          <div class="icon" data-target="#target-content"></div>
+                    </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
         <div className="overlay"></div>
@@ -43,8 +43,8 @@ const CarouselComponent = () => {
           <Carousel.Caption>
           <h2 class="bg-dark bg-opacity-50 py-2 px-4">Adversity builds character.</h2>
         <p class="bg-dark bg-opacity-50 py-2 px-4">It is your duty to challenge yourself and craft your own world.</p>
-        <a href="#" class="btn btn-outline-light px-4 py-2 rounded-0">Learn More</a>
-          </Carousel.Caption>
+        <div class="icon" data-target="#target-content"></div>
+                  </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
     </div>
