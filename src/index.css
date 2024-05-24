@@ -79,6 +79,7 @@
   
 }
 
+/* Faded Image Button */
 .imageRow img {
   height: 200px;
   width: 350px;
@@ -132,6 +133,17 @@
   text-align: center;
   font-family: 'Black Han Sans', 'Lucida Sans Regular';
 }
+
+.overlay-text-footer {
+  color: white;
+  font-size: 1.9rem; /* Adjust the font size as needed */
+  text-align: center;
+  font-family: 'Teko', 'Lucida Sans Regular';
+}
+
+/* Faded Image Buttons */
+
+/* Vision Card */
 
 .visionCard {
   width: 100%;
@@ -188,6 +200,83 @@
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-
 }
 
+/* Vision Card */
+
+/* Footer */
+.footer-img {
+  height: 400px;
+  width: 100%;
+  object-fit: cover;
+}
+
+footer {
+  background-image: radial-gradient(circle at 99% 33%, hsla(235,0%,48%,0.03) 0%, hsla(235,0%,48%,0.03) 37%,transparent 37%, transparent 100%),radial-gradient(circle at 46% 16%, hsla(235,0%,48%,0.03) 0%, hsla(235,0%,48%,0.03) 43%,transparent 43%, transparent 100%),radial-gradient(circle at 99% 25%, hsla(235,0%,48%,0.03) 0%, hsla(235,0%,48%,0.03) 22%,transparent 22%, transparent 100%),radial-gradient(circle at 57% 88%, hsla(235,0%,48%,0.03) 0%, hsla(235,0%,48%,0.03) 86%,transparent 86%, transparent 100%),radial-gradient(circle at 82% 78%, hsla(235,0%,48%,0.03) 0%, hsla(235,0%,48%,0.03) 22%,transparent 22%, transparent 100%),linear-gradient(90deg, rgb(0,0,0),rgb(0,0,0));}
+/* Footer */
+
+  /* Button */
+.button {
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  padding-block: 0.5rem;
+  padding-inline: 1.25rem;
+  background-color: rgb(40, 40, 40);
+  border-radius: 9999px;
+  width: 135px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #ffff;
+  gap: 10px;
+  font-weight: bold;
+  border: 3px solid #ffffff4d;
+  outline: none;
+  overflow: hidden;
+  font-size: 25px;
+}
+
+.button:hover {
+  transform: scale(1.05);
+  border-color: #fff9;
+}
+
+.button:hover .icon {
+  transform: translate(4px);
+}
+
+.button:hover::before {
+  animation: shine 1.5s ease-out infinite;
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100%;
+  background-image: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0) 70%
+  );
+  top: 0;
+  left: -100px;
+  opacity: 0.6;
+}
+
+@keyframes shine {
+  0% {
+    left: -100px;
+  }
+
+  60% {
+    left: 100%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+/* Button */
