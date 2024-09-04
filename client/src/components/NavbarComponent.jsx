@@ -1,11 +1,19 @@
-const NavbarComponent = () => {
+import { Link } from "react-router-dom";
+import Auth from "../utils/auth";
+import "../styles/Navbar.css";
 
-	return (
-      <nav id="navbar" className="navbar navbar-expand-lg navbar-dark">
+const NavbarComponent = () => {
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
+
+  return (
+    <nav id="navbar" className="navbar navbar-expand-lg navbar-dark">
       <div className="container-fluid">
-        <a className="navbar-brand mt-1 fs-2 p-2 title" href="#">
+        <Link className="navbar-brand mt-1 fs-2 p-2" to="/">
           Stay Motivated.
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -17,31 +25,37 @@ const NavbarComponent = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse " id="navbarSupportedContent">
-          <ul className="navbar-nav mx-auto mb-2 mb-lg-0 ">
-            <li className="nav-item mx-5 ">
-              <a className="nav-link active " aria-current="page" href="#">
-                Motivation
-              </a>
-            </li>
-            <li className="nav-item mx-5">
-              <a className="nav-link active" aria-current="page" href="#">
-                Self Improvement
-              </a>
-            </li>
-            <li className="nav-item mx-5">
-              <a className="nav-link active" aria-current="page" href="#">
-                Success Story
-              </a>
-            </li>
-          </ul>
-          <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">
-                Sign up
-              </a>
+              <Link className="nav-link" to="/motivation">
+                Motivation
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/self-improvement">
+                Self Improvement
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/success-stories">
+                Success Stories
+              </Link>
             </li>
           </ul>
+          {Auth.loggedIn() ? (
+            <button
+              id="logoutButton"
+              className="logoutBtn btn btn-lg m-2"
+              onClick={logout}
+            >
+              Logout
+            </button>
+          ) : (
+            <Link to="/login" className="btn btn-outline-light">
+              Log in
+            </Link>
+          )}
         </div>
       </div>
     </nav>
