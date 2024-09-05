@@ -9,6 +9,7 @@ import Homepage from './pages/HomePage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
 import DisciplinePage from './pages/DisciplinePage.jsx';
+import FaithPage from './pages/FaithPage.jsx';
 
 
 const router = createBrowserRouter([
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: '/discipline',
         element: <DisciplinePage />
+      },
+      {
+        path: '/faith',
+        element: <FaithPage />
       }
     ]
   }

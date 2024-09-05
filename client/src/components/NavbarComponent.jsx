@@ -46,7 +46,7 @@ const NavbarComponent = () => {
           {Auth.loggedIn() ? (
             <button
               id="logoutButton"
-              className="logoutBtn btn btn-lg m-2"
+              className="btn btn-outline-light"
               onClick={logout}
             >
               Logout

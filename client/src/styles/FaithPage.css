@@ -1,0 +1,264 @@
+.faith-page {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.faith-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.faith-title {
+  font-size: 3rem;
+  color: #ffa500;
+  margin-bottom: 1rem;
+}
+
+.faith-subtitle {
+  font-size: 1.5rem;
+  color: #e0e0e0;
+  text-align: center; /* Add this line */
+}
+
+.faith-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 2rem;
+}
+
+.faith-card {
+  background-color: #2a2a2a;
+  border-radius: 10px;
+  padding: 1.5rem;
+  width: calc(33% - 1rem);
+  min-width: 250px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.faith-card:hover {
+  transform: translateY(-5px);
+}
+
+.faith-card-title {
+  font-size: 1.5rem;
+  color: #ffa500;
+  margin-bottom: 1rem;
+}
+
+.faith-card-content {
+  font-size: 1rem;
+  color: #e0e0e0;
+}
+
+.faith-cta {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.faith-button {
+  background-color: #ffa500;
+  color: #1a1a1a;
+  font-size: 1.2rem;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.faith-button:hover {
+  background-color: #ff8c00;
+}
+
+.faith-hero {
+  width: 100%;
+  height: 70vh;
+  background-image: url('https://img.freepik.com/premium-photo/sunlight-shining-through-dirty-window-with-tree-background-generative-ai_1035766-7015.jpg?uid=R160620524&ga=GA1.1.1261594997.1724037380&semt=ais_hybrid');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.faith-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(26, 26, 26, 0.7);
+}
+
+.faith-hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2rem;
+  max-width: 600px;
+  width: 90%;
+  background-color: rgba(26, 26, 26, 0.8);
+  border-radius: 10px;
+}
+
+.faith-hero-title {
+  font-size: 3rem;
+  color: #ffa500;
+  margin-bottom: 1rem;
+}
+
+.faith-hero-text {
+  font-size: 1.3rem;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+}
+
+.faith-hero-image {
+  width: 50%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.faith-section {
+  margin-bottom: 5rem; /* Increased from 3rem to 5rem */
+}
+
+.faith-section-title {
+  font-size: 2rem;
+  color: #ffa500;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.faith-quote {
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #e0e0e0;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.faith-quote-author {
+  font-weight: bold;
+  color: #ffa500;
+}
+
+.community-features {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2rem;
+}
+
+.community-feature {
+  text-align: center;
+  flex: 0 0 30%;
+}
+
+.community-feature-icon {
+  font-size: 2.5rem;
+  color: #ffa500;
+  margin-bottom: 1rem;
+}
+
+.community-feature-title {
+  font-size: 1.2rem;
+  color: #ffa500;
+  margin-bottom: 0.5rem;
+}
+
+.community-feature-description {
+  font-size: 1rem;
+  color: #e0e0e0;
+}
+
+/* Add this new class for content padding */
+.faith-content-wrapper {
+  padding: 2rem;
+  max-width: 1200px; /* Add a max-width for larger screens */
+  margin: 0 auto; /* Center the content */
+}
+
+/* Add this new class for the last section */
+.faith-section:last-child {
+  margin-bottom: 3rem; /* Keep the original margin for the last section */
+}
+
+/* Add this new class */
+.faith-section.join-community {
+  margin-top: 5rem;
+}
+
+.member-stories {
+  margin-top: 4rem;
+}
+
+.member-stories-title {
+  font-size: 1.8rem;
+  color: #ffa500;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.member-stories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.member-story {
+  background-color: #2a2a2a;
+  border-radius: 10px;
+  overflow: visible; /* Change from hidden to visible */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  padding-top: 80px; /* Increase padding-top to make room for the image */
+  position: relative;
+  margin-top: 60px; /* Add margin-top to create space for the image */
+}
+
+.member-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  position: absolute;
+  top: -60px; /* Keep this the same */
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid #ffa500;
+}
+
+.member-content {
+  padding: 1rem 1.5rem 1.5rem; /* Reduce top padding */
+  position: relative;
+}
+
+.quote-icon {
+  color: #ffa500;
+  font-size: 1.5rem;
+  position: absolute;
+  top: -0.5rem; /* Adjust this value as needed */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.member-quote {
+  font-style: italic;
+  color: #e0e0e0;
+  margin-bottom: 1rem;
+  text-align: center; /* Add this line */
+}
+
+.member-name {
+  color: #ffa500;
+  font-weight: bold;
+  text-align: center; /* Change this from 'right' to 'center' */
+}

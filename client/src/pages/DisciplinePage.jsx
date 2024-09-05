@@ -128,7 +128,7 @@ const DisciplinePage = () => {
           </div>
           <div className="consistency-image">
             <img
-              src="https://img.freepik.com/free-photo/young-fitness-man-studio_7502-5008.jpg?uid=R160620524&ga=GA1.1.1261594997.1724037380&semt=ais_hybrid"
+              src="https://img.freepik.com/premium-photo/silhouette-woman-lifting-weights-against-yellow-background_412311-6321.jpg?uid=R160620524&ga=GA1.1.1261594997.1724037380&semt=ais_hybrid"
               alt="Consistent discipline"
             />
           </div>

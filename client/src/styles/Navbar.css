@@ -31,15 +31,11 @@
 }
 
 .logoutBtn {
-  background-color: #ff4500;
-  color: #fff;
-  border: none;
-  transition: all 0.3s ease;
+  /* Remove this block */
 }
 
 .logoutBtn:hover {
-  background-color: #ff6347;
-  transform: scale(1.05);
+  /* Remove this block */
 }
 
 .navbar-nav .nav-item:not(:last-child) {
@@ -68,10 +64,12 @@
 .btn-outline-light {
   color: #ff8c00;
   border-color: #ff8c00;
+  transition: all 0.3s ease;
 }
 
 .btn-outline-light:hover {
   color: #1a1a1a;
   background-color: #ff8c00;
   border-color: #ff8c00;
+  transform: scale(1.05);
 }
