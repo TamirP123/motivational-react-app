@@ -3,11 +3,35 @@ import '../styles/FaithPage.css';
 import { FaUsers, FaPray, FaBook, FaQuoteLeft } from 'react-icons/fa';
 
 const FaithPage = () => {
+  const [animatedElements, setAnimatedElements] = useState([]);
+  const observerRef = useRef(null);
 
   useEffect(() => {
-    // Scroll to the top of the page when the component mounts
     window.scrollTo(0, 0);
+
+    observerRef.current = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setAnimatedElements((prev) => [...prev, entry.target]);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    const elements = document.querySelectorAll('.faith-card, .community-feature, .member-story, .faith-section');
+    elements.forEach((el) => observerRef.current.observe(el));
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
   }, []);
+
+  useEffect(() => {
+    animatedElements.forEach((el) => {
+      el.classList.add('animate');
+    });
+  }, [animatedElements]);
 
   const memberStories = [
     {

@@ -30,13 +30,7 @@
   transform: translateY(-2px);
 }
 
-.logoutBtn {
-  /* Remove this block */
-}
 
-.logoutBtn:hover {
-  /* Remove this block */
-}
 
 .navbar-nav .nav-item:not(:last-child) {
   margin-right: 1rem;

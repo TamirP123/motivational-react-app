@@ -50,14 +50,14 @@
   .signup-form .form-control{
     height: 50px;
     box-shadow: none;
-    color: #ffffff; /* Changed from #d3d3d3 to white */
+    color: #ffffff; 
     background-color: #333;
     border: 1px solid #444;
     border-radius: 5px;
     font-size: 1.1rem;
   }
   .signup-form .form-control::placeholder {
-    color: #969fa4; /* Keeping placeholder text a bit darker for contrast */
+    color: #969fa4; 
   }
   .signup-form .form-control:focus{
     border-color: #ff8c00;
@@ -75,9 +75,9 @@
     border-radius: 5px;
     transition: background-color 0.3s ease;
     margin-top: 10px;
-    display: block; /* Added to allow margin auto to work */
-    margin-left: auto; /* Added to center the button */
-    margin-right: auto; /* Added to center the button */
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto; 
   }
   .signup-form .btn:hover{
     background-color: #e67e00;
@@ -104,11 +104,9 @@
   .signup-form {
     animation: fadeIn 0.5s ease-out, float 6s ease-in-out infinite;
   }
-  /* Add an orange glow effect on input focus */
   .signup-form .form-control:focus {
     box-shadow: 0 0 15px rgba(255, 140, 0, 0.7);
   }
-  /* Add a subtle gradient background to the form */
   .signup-form {
     background: linear-gradient(145deg, #2a2a2a, #333333);
   }
@@ -123,5 +121,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 60px 0; /* Increased padding to top and bottom */
+  padding: 60px 0; 
 }

@@ -16,6 +16,8 @@ const HomePage = () => {
     let typingInterval;
     let pauseTimeout;
 
+    window.scrollTo(0, 0);
+
     const startTyping = () => {
       typingInterval = setInterval(() => {
         if (index < fullText.length) {
