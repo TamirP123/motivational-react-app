@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const MotivationalCategories = () => {
   const categories = [
@@ -26,7 +27,7 @@ const MotivationalCategories = () => {
       <div className="image-row">
         {categories.map((item, index) => (
           <div key={item.category} className={`image-wrapper slide-in-${index % 2 === 0 ? 'left' : 'right'} ${item.category.toLowerCase()}-image`} style={{animationDelay: `${index * 0.2}s`}}>
-            <button className="image-button">
+            <Link to={`/${item.category.toLowerCase()}`} className="image-button" style={{ textDecoration: 'none' }}>
               <img
                 src={item.src}
                 alt={item.category}
@@ -35,7 +36,7 @@ const MotivationalCategories = () => {
               <div className="overlay">
                 <div className="overlay-text">{item.category}</div>
               </div>
-            </button>
+            </Link>
           </div>
         ))}
       </div>

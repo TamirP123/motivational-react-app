@@ -1,0 +1,127 @@
+.signup {
+    background-color: #d3d3d3;
+  }
+  
+  .logbtn {
+    background-color: rgb(40, 40, 40);
+  }
+  
+  .form-control{
+    height: 40px;
+    box-shadow: none;
+    color: #969fa4;
+  }
+  .form-control:focus{
+    border-color: #000000;
+  }
+  .form-control, .btn{        
+    border-radius: 3px;
+    background-color: rgb(40, 40, 40);
+  }
+  .signup-form{
+    width: 500px;
+    margin: 40px auto; /* Added margin to top and bottom */
+    padding: 40px;
+    background-color: #2a2a2a;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(145deg, #2a2a2a, #333333);
+  }
+  .signup-form h2 {
+    font-size: 3rem;
+    font-family: 'Oswald', sans-serif;
+    color: #ff8c00;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  .signup-form .hint-text{
+    color: #d3d3d3;
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  .signup-form form{
+    color: #d3d3d3;
+  }
+  .signup-form .form-group{
+    margin-bottom: 25px;
+  }
+  .signup-form .form-control{
+    height: 50px;
+    box-shadow: none;
+    color: #ffffff; /* Changed from #d3d3d3 to white */
+    background-color: #333;
+    border: 1px solid #444;
+    border-radius: 5px;
+    font-size: 1.1rem;
+  }
+  .signup-form .form-control::placeholder {
+    color: #969fa4; /* Keeping placeholder text a bit darker for contrast */
+  }
+  .signup-form .form-control:focus{
+    border-color: #ff8c00;
+    box-shadow: 0 0 15px rgba(255, 140, 0, 0.7);
+  }
+  .signup-form .btn{        
+    font-size: 1.2rem;
+    font-weight: bold;
+    min-width: 140px;
+    outline: none !important;
+    background-color: #ff8c00;
+    border: none;
+    color: #1a1a1a;
+    padding: 15px 25px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    display: block; /* Added to allow margin auto to work */
+    margin-left: auto; /* Added to center the button */
+    margin-right: auto; /* Added to center the button */
+  }
+  .signup-form .btn:hover{
+    background-color: #e67e00;
+  }
+  .signup-form a{
+    color: #ff8c00;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  .signup-form a:hover{
+    color: #e67e00;
+    text-decoration: underline;
+  }
+  .text-center {
+    margin-top: 30px;
+    color: #d3d3d3;
+    font-size: 1.1rem;
+  }
+  /* Add a subtle animation for the form */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .signup-form {
+    animation: fadeIn 0.5s ease-out, float 6s ease-in-out infinite;
+  }
+  /* Add an orange glow effect on input focus */
+  .signup-form .form-control:focus {
+    box-shadow: 0 0 15px rgba(255, 140, 0, 0.7);
+  }
+  /* Add a subtle gradient background to the form */
+  .signup-form {
+    background: linear-gradient(145deg, #2a2a2a, #333333);
+  }
+  
+  body {
+    background-color: #1a1a1a;
+  }
+
+.login-page-wrapper, .signup-page-wrapper {
+  background-color: #1a1a1a;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0; /* Increased padding to top and bottom */
+}

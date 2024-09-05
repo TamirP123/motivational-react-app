@@ -4,6 +4,7 @@ import MotivationalCategories from "../components/MotivationalCategories";
 import VisionSection from "../components/VisionSection";
 import AchieveGoals from "../components/AchieveGoals";
 import DailyMotivation from "../components/DailyMotivation";
+import TestimonialSection from "../components/TestimonialSection";
 import '../styles/HomePage.css';
 
 const HomePage = () => {
@@ -47,6 +48,7 @@ const HomePage = () => {
         <VisionSection />
         <AchieveGoals typedText={typedText} />
         <DailyMotivation />
+        <TestimonialSection />
       </div>
     </div>
   );
