@@ -163,3 +163,46 @@
 .carousel-item.active .carousel-image-container img {
   transform: scale(1.1);
 }
+
+@media (max-width: 767px) {
+  .carousel-container {
+    height: 60vh; 
+    margin-top: 0;
+    width: 100vw; 
+    overflow-x: hidden; 
+  }
+
+  .carousel-image-container {
+    width: 100vw; 
+  }
+
+  .custom-caption {
+    width: 90%;
+    padding: 0.5rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .custom-caption h2 {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .custom-caption p {
+    font-size: 0.8rem;
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 10%;
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    padding: 10px;
+  }
+
+  .scroll-indicator {
+    display: none; /* Hide scroll indicator on mobile */
+  }
+}

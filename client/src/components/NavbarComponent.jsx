@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from "react-router-dom";
 import Auth from "../utils/auth";
 import "../styles/Navbar.css";
@@ -9,7 +10,7 @@ const NavbarComponent = () => {
   };
 
   return (
-    <nav id="navbar" className="navbar navbar-expand-lg navbar-dark">
+    <nav id="navbar" className="navbar navbar-expand-lg navbar-dark fixed-top">
       <div className="container-fluid">
         <Link className="navbar-brand mt-1 fs-2 p-2" to="/">
           Stay Motivated.

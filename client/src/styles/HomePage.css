@@ -170,3 +170,46 @@
     font-size: 2rem;
   }
 }
+
+@media (max-width: 767px) {
+  .home-page {
+    padding-top: 0;
+    overflow-x: hidden; 
+  }
+
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%; 
+    max-width: 100%;
+  }
+
+  .section {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0; 
+  }
+
+  .image-row {
+    margin-left: -5px;
+    margin-right: -5px;
+  }
+
+  .image-wrapper {
+    width: calc(50% - 10px); 
+    margin: 0 5px 10px;
+  }
+
+  .goals-section {
+    flex-direction: column; 
+  }
+
+  .goals-image-wrapper {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .typing-overlay {
+    padding: 10px;
+  }
+}

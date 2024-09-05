@@ -5,7 +5,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000; /* Ensure navbar is above other content */
+  z-index: 1000; 
 }
 
 
@@ -52,6 +52,36 @@
   .navbar-nav .nav-item {
     margin-right: 0;
     margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  #navbar {
+    padding: 0.3rem 0.5rem;
+    width: 100%; 
+  }
+
+  .container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+
+  .navbar-nav {
+    margin-top: 0.5rem;
+  }
+
+  .nav-link {
+    padding: 0.3rem 0;
+  }
+
+  .btn-outline-light {
+    margin-top: 0.5rem;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.9rem;
   }
 }
 
