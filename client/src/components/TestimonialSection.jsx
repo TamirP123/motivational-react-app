@@ -45,10 +45,14 @@ const TestimonialSection = () => {
             className={`testimonial ${index === currentTestimonial ? 'active' : ''}`}
           >
             <div className="testimonial-content">
-              <img src={testimonial.avatar} alt={testimonial.name} className="avatar" />
-              <p className="quote">"{testimonial.quote}"</p>
-              <p className="name">{testimonial.name}</p>
-              <p className="role">{testimonial.role}</p>
+              <div className="avatar-container">
+                <img src={testimonial.avatar} alt={testimonial.name} className="avatar" />
+              </div>
+              <div className="text-container">
+                <p className="quote">"{testimonial.quote}"</p>
+                <p className="name">{testimonial.name}</p>
+                <p className="role">{testimonial.role}</p>
+              </div>
             </div>
           </div>
         ))}

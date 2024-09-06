@@ -1,0 +1,359 @@
+.confidence-page {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+  font-family: 'Roboto', Arial, sans-serif;
+  scroll-behavior: smooth;
+}
+
+.confidence-hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://img.freepik.com/premium-photo/man-suit-sunglasses-stands-front-city-skyline_1288522-588.jpg?uid=R160620524&ga=GA1.1.1261594997.1724037380&semt=ais_hybrid') center/cover no-repeat;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.confidence-hero-content {
+  max-width: 800px;
+  animation: confidenceHeroFade 1.5s ease-out;
+}
+
+.confidence-hero-title {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  color: #ff8c00;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+}
+
+.confidence-hero-text {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: #f0f0f0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.content {
+  max-width: 1200px;
+  margin: 80px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+h2 {
+  color: #ff8c00;
+  font-size: 3rem;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.intro {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  max-width: 800px;
+  margin: 0 auto 60px;
+}
+
+.confidence-tips {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-top: 60px;
+  margin-bottom: 80px;
+}
+
+.tip {
+  flex-basis: calc(33.333% - 40px);
+  min-width: 280px;
+  background-color: #2a2a2a;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tip:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(255, 140, 0, 0.2);
+  animation: confidenceTipPulse 0.8s ease-in-out;
+}
+
+.tip h3 {
+  color: #ff8c00;
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.tip p {
+  color: #f0f0f0;
+  line-height: 1.7;
+  font-size: 1.1rem;
+}
+
+.confidence-booster {
+  background-color: #2a2a2a;
+  padding: 60px;
+  border-radius: 15px;
+  margin: 100px auto;
+  max-width: 700px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.confidence-booster h3 {
+  color: #ff8c00;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+.generate-btn {
+  background-color: #ff8c00;
+  color: #f0f0f0;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 30px;
+  font-weight: 600;
+}
+
+.generate-btn:hover {
+  background-color: #e67e00;
+  transform: translateY(-3px);
+}
+
+.generate-btn:active {
+  animation: confidenceBoosterShake 0.3s ease-in-out;
+}
+
+.affirmation-display {
+  margin-top: 40px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #ff8c00;
+  animation: confidenceAffirmationReveal 0.5s ease-out;
+  padding: 20px;
+  background-color: rgba(255, 140, 0, 0.1);
+  border-radius: 10px;
+}
+
+.quote {
+  margin: 100px auto;
+  max-width: 800px;
+  padding: 40px;
+  background-color: #2a2a2a;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  animation: confidenceQuoteSlideIn 0.8s ease-out;
+}
+
+blockquote {
+  font-style: italic;
+  font-size: 1.6em;
+  color: #f0f0f0;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+cite {
+  font-style: normal;
+  color: #ff8c00;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.call-to-action {
+  background-color: #2a2a2a;
+  padding: 80px 50px;
+  border-radius: 15px;
+  margin: 100px auto;
+  max-width: 800px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.call-to-action h3 {
+  color: #ff8c00;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.call-to-action p {
+  font-size: 1.3em;
+  margin-bottom: 40px;
+  line-height: 1.7;
+}
+
+.cta-button {
+  background-color: #ff8c00;
+  color: #f0f0f0;
+  border: none;
+  padding: 18px 40px;
+  font-size: 1.3em;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-weight: 600;
+}
+
+.cta-button:hover {
+  background-color: #e67e00;
+  transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+  .confidence-hero-title {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+  }
+
+  .confidence-tips {
+    flex-direction: column;
+  }
+
+  .tip {
+    flex-basis: 100%;
+  }
+
+  .call-to-action h3 {
+    font-size: 2rem;
+  }
+}
+
+.confidence-challenge {
+  background-color: #2a2a2a;
+  padding: 60px;
+  border-radius: 15px;
+  margin: 100px auto;
+  max-width: 800px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+.confidence-challenge:hover {
+  animation: confidenceChallengeGlow 2s infinite;
+}
+
+.confidence-challenge h3 {
+  color: #ff8c00;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.confidence-challenge p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.challenge-task {
+  background-color: rgba(255, 140, 0, 0.1);
+  padding: 30px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.challenge-task h4 {
+  color: #ff8c00;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.challenge-btn {
+  background-color: #ff8c00;
+  color: #f0f0f0;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+.challenge-btn:hover {
+  background-color: #e67e00;
+  transform: translateY(-3px);
+}
+
+.challenge-completed {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #4CAF50;
+  animation: confidenceChallengeCompleted 0.5s ease-out;
+}
+
+@keyframes confidenceHeroFade {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes confidenceTipPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes confidenceBoosterShake {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes confidenceAffirmationReveal {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes confidenceQuoteSlideIn {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes confidenceChallengeGlow {
+  0% { box-shadow: 0 0 5px rgba(255, 140, 0, 0.5); }
+  50% { box-shadow: 0 0 20px rgba(255, 140, 0, 0.8); }
+  100% { box-shadow: 0 0 5px rgba(255, 140, 0, 0.5); }
+}
+
+@keyframes confidenceChallengeCompleted {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Add a transition for all interactive elements */
+.confidence-page button,
+.confidence-page .tip,
+.confidence-page .confidence-challenge {
+  transition: all 0.3s ease;
+}
+
+/* Add a subtle hover effect for all headings */
+.confidence-page h1,
+.confidence-page h2,
+.confidence-page h3,
+.confidence-page h4 {
+  transition: color 0.3s ease;
+}
+
+.confidence-page h1:hover,
+.confidence-page h2:hover,
+.confidence-page h3:hover,
+.confidence-page h4:hover {
+  color: #ffa500;
+}
