@@ -10,7 +10,7 @@ class CloudinaryUploadWidget extends Component {
       },
       (error, result) => {
         if (!error && result && result.event === "success") {
-          console.log("Done! Here is the image info: ", result.info)
+          console.log("Done! Here is the image info: ", result.info);
           const image = result.info;
           this.props.onImageUpload(image.url);
         }
@@ -27,13 +27,9 @@ class CloudinaryUploadWidget extends Component {
 
   render() {
     return (
-      <button className="widgetbtn" id="upload_widget">
- <i  class="fa-solid fa-upload"></i>
- <span class="text">
-    Upload Photo
-  </span>
-      </button>
-     
+      <div className="upload-widget" id="upload_widget">
+        {this.props.children}
+      </div>
     );
   }
 }

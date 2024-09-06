@@ -2,10 +2,11 @@ const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 const Post = require('./Post');
 
-const userSchema =  new Schema({
+const userSchema = new Schema({
   username: {
     type: String,
     required: true,
+    unique: true,
     trim: true,
   },
   password: {
@@ -25,6 +26,10 @@ const userSchema =  new Schema({
       ref: 'Post'
     },
   ],
+  profileImage: {
+    type: String,
+    default: 'https://example.com/default-profile-image.jpg'
+  },
 });
 
 userSchema.pre('save', async function(next) {

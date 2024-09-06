@@ -4,13 +4,14 @@ type User {
   username: String!
   email: String!
   password: String!
+  profileImage: String
   posts: [Post]
 }
 
 type Post {
   _id: ID
   description: String!
-  postAuthor: String
+  postAuthor: User
   createdAt: String
   comments: [Comment]
 }
@@ -42,7 +43,8 @@ type Mutation {
   addComment(postId: ID!, commentText: String!): Post
   removePost(postId: ID!): Post
   removeComment(postId: ID!, commentId: ID!): Post
+  updateProfileImage(profileImage: String!): User
 }
 `;
 
-module.exports = typeDefs
+module.exports = typeDefs;

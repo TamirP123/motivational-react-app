@@ -4,74 +4,110 @@ body {
 }
 
 .post-page {
-  max-width: 800px;
+  max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-}
-
-.post-content, .comments-section, .comment-form {
-  background-color: #333333;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-  margin-bottom: 30px;
+  background-color: #1a1a1a;
   color: #ffffff;
 }
 
-.post-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.back-button {
+  display: inline-block;
   margin-bottom: 20px;
-}
-
-.post-content h2 {
-  color: #ff6600;
-  font-size: 24px;
+  color: #ff8c00;
+  text-decoration: none;
   font-weight: bold;
-  margin: 0;
 }
 
-.post-description {
-  font-size: 16px;
-  line-height: 1.6;
+.post-content {
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  overflow: hidden;
   margin-bottom: 20px;
-  padding: 15px;
-  background-color: #3a3a3a;
-  border-radius: 6px;
+}
+
+.post-header {
+  padding: 16px;
+  border-bottom: 1px solid #444444;
+}
+
+.post-author-info {
+  display: flex;
+  align-items: center;
+}
+
+.author-image,
+.author-image-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.author-image {
+  object-fit: cover;
+}
+
+.author-image-placeholder {
+  background-color: #444444;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: #ff8c00;
+}
+
+.author-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-header h2 {
+  font-size: 16px;
+  margin: 0;
+  color: #ffffff;
 }
 
 .post-timestamp {
-  font-size: 14px;
+  font-size: 12px;
   color: #999999;
 }
 
-.comments-section h3, .comment-form h4 {
-  color: #ff6600;
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 20px;
+.post-description {
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.comments-section {
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 20px;
+}
+
+.comments-section h3 {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: #ff8c00;
 }
 
 .comment {
   background-color: #3a3a3a;
-  border-radius: 6px;
-  padding: 20px;
-  margin-bottom: 20px;
-  position: relative;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
 }
 
 .comment-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .comment-author {
-  font-size: 16px;
   font-weight: bold;
-  color: #ff6600;
+  color: #ff8c00;
 }
 
 .comment-timestamp {
@@ -81,57 +117,64 @@ body {
 
 .comment-text {
   font-size: 14px;
-  line-height: 1.5;
-  color: #ffffff;
-  padding: 10px;
-  background-color: #444444;
-  border-radius: 4px;
+  line-height: 1.4;
+}
+
+.delete-comment {
+  background-color: transparent;
+  color: #ff8c00;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  margin-top: 8px;
 }
 
 .no-comments {
   text-align: center;
   color: #999999;
   font-style: italic;
-  padding: 20px;
-  background-color: #3a3a3a;
-  border-radius: 6px;
+}
+
+.comment-form {
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 20px;
+}
+
+.comment-form h4 {
+  font-size: 16px;
+  margin-bottom: 12px;
+  color: #ff8c00;
 }
 
 .comment-form textarea {
   width: 100%;
-  height: 100px;
-  padding: 15px;
-  border: 1px solid #555555;
-  border-radius: 6px;
+  height: 80px;
+  background-color: #3a3a3a;
+  border: 1px solid #444444;
+  border-radius: 4px;
+  color: #ffffff;
+  padding: 8px;
   font-size: 14px;
   resize: vertical;
-  margin-bottom: 15px;
-  background-color: #2a2a2a;
-  color: #ffffff;
 }
 
 .comment-form button {
-  background-color: #ff6600;
+  background-color: #ff8c00;
   color: #ffffff;
   border: none;
-  padding: 12px 24px;
-  border-radius: 6px;
-  font-size: 16px;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  margin-top: 12px;
+  transition: background-color 0.3s;
 }
 
 .comment-form button:hover {
-  background-color: #ff8533;
-  transform: translateY(-2px);
-}
-
-.loading {
-  text-align: center;
-  color: #ffffff;
-  font-size: 18px;
-  margin-top: 50px;
+  background-color: #ff9f33;
 }
 
 @media (max-width: 768px) {

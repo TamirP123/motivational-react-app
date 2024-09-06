@@ -10,17 +10,35 @@ const resolvers = {
       return User.findOne({ username }).populate("posts");
     },
     posts: async (parent, { username }) => {
-      const params = username ? { username } : {};
-      return Post.find(params).sort({ createdAt: -1 });
+      try {
+        const params = username ? { username } : {};
+        const posts = await Post.find(params)
+          .sort({ createdAt: -1 })
+          .populate({
+            path: 'postAuthor',
+            select: 'username profileImage'
+          });
+        console.log('Fetched posts:', posts);
+        return posts;
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+        throw new Error('Failed to fetch posts');
+      }
     },
     post: async (parent, { postId }) => {
-      return Post.findOne({ _id: postId });
+      return Post.findOne({ _id: postId }).populate({
+        path: 'postAuthor',
+        select: 'username profileImage'
+      });
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate("posts");
+        const userData = await User.findOne({ _id: context.user._id })
+          .select('-__v -password')
+          .populate('posts');
+        return userData;
       }
-      throw AuthenticationError;
+      throw new AuthenticationError('Not logged in');
     },
   },
 
@@ -50,17 +68,29 @@ const resolvers = {
     },
     addPost: async (parent, { description }, context) => {
       if (context.user) {
-        const post = await Post.create({
-          description,
-          postAuthor: context.user.username,
-        });
+        try {
+          const post = await Post.create({
+            description,
+            postAuthor: context.user._id,
+          });
 
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { posts: post._id } }
-        );
+          await User.findByIdAndUpdate(
+            context.user._id,
+            { $push: { posts: post._id } },
+            { new: true }
+          );
 
-        return post;
+          const populatedPost = await Post.findById(post._id).populate({
+            path: 'postAuthor',
+            select: 'username profileImage'
+          });
+
+          console.log('Created post:', populatedPost);
+          return populatedPost;
+        } catch (error) {
+          console.error('Error creating post:', error);
+          throw new Error('Failed to create post');
+        }
       }
       throw AuthenticationError;
     },
@@ -83,17 +113,26 @@ const resolvers = {
     },
     removePost: async (parent, { postId }, context) => {
       if (context.user) {
-        const post = await Post.findOneAndDelete({
-          _id: postId,
-          postAuthor: context.user.username,
-        });
+        try {
+          const post = await Post.findOneAndDelete({
+            _id: postId,
+            postAuthor: context.user._id,
+          });
 
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { posts: post._id } }
-        );
+          if (!post) {
+            throw new Error('Post not found or you are not authorized to delete this post');
+          }
 
-        return post;
+          await User.findByIdAndUpdate(
+            context.user._id,
+            { $pull: { posts: postId } }
+          );
+
+          return post;
+        } catch (error) {
+          console.error('Error removing post:', error);
+          throw new Error('Failed to remove post');
+        }
       }
       throw AuthenticationError;
     },
@@ -109,6 +148,16 @@ const resolvers = {
               },
             },
           },
+          { new: true }
+        );
+      }
+      throw AuthenticationError;
+    },
+    updateProfileImage: async (parent, { profileImage }, context) => {
+      if (context.user) {
+        return User.findByIdAndUpdate(
+          context.user._id,
+          { profileImage },
           { new: true }
         );
       }

@@ -45,13 +45,18 @@ const NavbarComponent = () => {
             </li>
           </ul>
           {Auth.loggedIn() ? (
-            <button
-              id="logoutButton"
-              className="btn btn-outline-light"
-              onClick={logout}
-            >
-              Logout
-            </button>
+            <div className="d-flex align-items-center">
+              <Link to="/profile" className="btn btn-outline-light me-2">
+                View Profile
+              </Link>
+              <button
+                id="logoutButton"
+                className="btn btn-outline-light"
+                onClick={logout}
+              >
+                Logout
+              </button>
+            </div>
           ) : (
             <Link to="/login" className="btn btn-outline-light">
               Log in

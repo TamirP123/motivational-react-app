@@ -13,21 +13,26 @@ module.exports = {
 		}
 	}),
   
-	authMiddleware: function({req}){
-		let token = req.body.token || req.query.token || req.headers.authorization || "";
-    
-		token = token.split(' ').pop().trim();
+	authMiddleware: function({ req }) {
+		let token = req.body.token || req.query.token || req.headers.authorization;
 
-		if(token.length === 0){
+		if (req.headers.authorization) {
+			token = token.split(' ').pop().trim();
+		}
+
+		if (!token) {
 			return req;
 		}
 
-		try{
-			const {authenticatedPerson} = jwt.verify(token, secret, {maxAge: expiration})
+		try {
+			const { authenticatedPerson } = jwt.verify(token, secret, { maxAge: expiration });
 			req.user = authenticatedPerson;
-		} catch {
-			console.log("invalid token");
+			console.log('Authenticated user:', req.user);
+		} catch (err) {
+			console.log('Invalid token');
+			console.error(err);
 		}
+
 		return req;
 	},
 

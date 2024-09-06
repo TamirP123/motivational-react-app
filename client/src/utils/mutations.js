@@ -38,7 +38,11 @@ mutation addPost($description: String!) {
     _id
     description
     createdAt
-    postAuthor
+    postAuthor {
+      _id
+      username
+      profileImage
+    }
     comments {
       _id
       commentText
@@ -69,6 +73,29 @@ export const REMOVE_COMMENT = gql`
         _id
         commentText
         commentAuthor
+      }
+    }
+  }
+`;
+
+export const UPDATE_PROFILE_IMAGE = gql`
+  mutation updateProfileImage($profileImage: String!) {
+    updateProfileImage(profileImage: $profileImage) {
+      _id
+      username
+      profileImage
+    }
+  }
+`;
+
+export const REMOVE_POST = gql`
+  mutation removePost($postId: ID!) {
+    removePost(postId: $postId) {
+      _id
+      description
+      postAuthor {
+        _id
+        username
       }
     }
   }

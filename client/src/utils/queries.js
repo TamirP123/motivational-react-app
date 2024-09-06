@@ -1,4 +1,4 @@
-import { gql }  from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const QUERY_USER = gql`
   query user($username: String!) {
@@ -6,6 +6,7 @@ export const QUERY_USER = gql`
       _id
       username
       email
+      profileImage
       posts {
         _id
         description
@@ -21,7 +22,11 @@ export const QUERY_POSTS = gql`
     posts {
       _id
       description
-      postAuthor
+      postAuthor {
+        _id
+        username
+        profileImage
+      }
       createdAt
       comments {
         _id
@@ -37,9 +42,13 @@ export const QUERY_SINGLE_POST = gql`
   query getSinglePost($postId: ID!) {
     post(postId: $postId) {
       _id
-        description
-        postAuthor
-        createdAt
+      description
+      postAuthor {
+        _id
+        username
+        profileImage
+      }
+      createdAt
       comments {
         _id
         commentText
@@ -50,25 +59,18 @@ export const QUERY_SINGLE_POST = gql`
   }
 `;
 
-
 export const QUERY_ME = gql`
   query me {
     me {
       _id
       username
       email
+      profileImage
       posts {
         _id
-        category {
-          _id
-          name
-        }
         description
-        postAuthor
         createdAt
       }
     }
   }
 `;
-
-

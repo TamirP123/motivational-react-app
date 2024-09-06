@@ -14,7 +14,7 @@ import GrowthPage from './pages/GrowthPage.jsx';
 import ConfidencePage from './pages/ConfidencePage.jsx';
 import SuccessStories from './pages/SuccessStories.jsx';
 import Post from './pages/Post.jsx';
-
+import ProfilePage from './pages/ProfilePage.jsx';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -54,6 +54,10 @@ const router = createBrowserRouter([
       }, {
         path: '/post/:postId',
         element: <Post />
+      },
+      {
+        path: '/profile',
+        element: <ProfilePage />
       }
     ]
   }
