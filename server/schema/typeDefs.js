@@ -10,30 +10,9 @@ type User {
 type Post {
   _id: ID
   description: String!
-  image: String!
   postAuthor: String
   createdAt: String
   comments: [Comment]
-  category: Category
-}
-
-type Category {
-  _id: ID
-  name: String
-}
-
-type Thought {
-  _id: ID
-  thoughtText: String
-  thoughtAuthor: String
-  createdAt: String
-  comments: [Comment]!
-}
-
-type ThoughtComment {
-  _id: ID
-  commentText: String
-  createdAt: String
 }
 
 type Comment {
@@ -49,9 +28,6 @@ type Query {
   posts(username: String): [Post]
   post(postId: ID!): Post
   me: User
-  categories: [Category]
-  thoughts: [Thought]!
-  thought(thoughtId: ID!): Thought
 }
 
 type Auth {
@@ -62,14 +38,10 @@ type Auth {
 type Mutation {
   addUser(username: String!, email: String!, password: String!): Auth
   login(email: String!, password: String!): Auth
-  addPost(description: String!, image: String!, category: ID!): Post
+  addPost(description: String!): Post
   addComment(postId: ID!, commentText: String!): Post
   removePost(postId: ID!): Post
   removeComment(postId: ID!, commentId: ID!): Post
-  addThought(thoughtText: String!, thoughtAuthor: String!): Thought
-  addThoughtComment(thoughtId: ID!, commentText: String!): Thought
-  removeThought(thoughtId: ID!): Thought
-  removeThoughtComment(thoughtId: ID!, commentId: ID!): Thought
 }
 `;
 

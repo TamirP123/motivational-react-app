@@ -7,14 +7,6 @@ const postSchema = new Schema({
         trim: true,
         required: true,
     },
-    category: {
-      type: Schema.Types.ObjectId,
-      ref: 'Category'
-    },
-    image: {    
-        type: String, 
-        required: true,
-    },
     postAuthor: {
         type: String,
         trim: true,
@@ -57,13 +49,6 @@ const postSchema = new Schema({
   }
 );
 
-// postSchema.virtual('id').get(function() {
-//     return this._id.toHexString();
-// });
-
-// postSchema.set('toJSON', {
-//     virtuals: true
-// });
 
 const Post = model('Post', postSchema);
 

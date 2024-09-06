@@ -1,65 +1,30 @@
-const { User, Post, Category, Thought } = require('../models')
-const { signToken, AuthenticationError } = require('../utils/auth');
+const { User, Post } = require("../models");
+const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate('posts');
+      return User.find().populate("posts");
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('posts');
+      return User.findOne({ username }).populate("posts");
     },
     posts: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return Post.find(params).sort({ createdAt: -1 }).populate("category");
+      return Post.find(params).sort({ createdAt: -1 });
     },
     post: async (parent, { postId }) => {
-      return Post.findOne({ _id: postId }).populate("category");
-    },
-    categories: async () => {
-      return await Category.find();
+      return Post.findOne({ _id: postId });
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('posts');
+        return User.findOne({ _id: context.user._id }).populate("posts");
       }
       throw AuthenticationError;
-    },
-    thoughts: async () => {
-      return Thought.find().sort({ createdAt: -1 });
-    },
-
-    thought: async (parent, { thoughtId }) => {
-      return Thought.findOne({ _id: thoughtId });
     },
   },
 
   Mutation: {
-    addThought: async (parent, { thoughtText, thoughtAuthor }) => {
-      return Thought.create({ thoughtText, thoughtAuthor });
-    },
-    addThoughtComment: async (parent, { thoughtId, commentText }) => {
-      return Thought.findOneAndUpdate(
-        { _id: thoughtId },
-        {
-          $addToSet: { comments: { commentText } },
-        },
-        {
-          new: true,
-          runValidators: true,
-        }
-      );
-    },
-    removeThought: async (parent, { thoughtId }) => {
-      return Thought.findOneAndDelete({ _id: thoughtId });
-    },
-    removeThoughtComment: async (parent, { thoughtId, commentId }) => {
-      return Thought.findOneAndUpdate(
-        { _id: thoughtId },
-        { $pull: { comments: { _id: commentId } } },
-        { new: true }
-      );
-    },
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
@@ -83,12 +48,10 @@ const resolvers = {
 
       return { token, user };
     },
-    addPost: async (parent, { description, image, category }, context) => {
+    addPost: async (parent, { description }, context) => {
       if (context.user) {
         const post = await Post.create({
           description,
-          image,
-          category,
           postAuthor: context.user.username,
         });
 
@@ -154,4 +117,4 @@ const resolvers = {
   },
 };
 
-module.exports = resolvers
+module.exports = resolvers;

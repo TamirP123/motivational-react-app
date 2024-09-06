@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/ConfidencePage.css';
 
 const ConfidencePage = () => {
+
+    useEffect(() => {
+        // Scroll to the top of the page when the component mounts
+        window.scrollTo(0, 0);
+      }, []);
+
   const [affirmation, setAffirmation] = useState('');
   const [showAffirmation, setShowAffirmation] = useState(false);
   const [challengeCompleted, setChallengeCompleted] = useState(false);

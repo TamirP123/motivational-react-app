@@ -8,12 +8,7 @@ export const QUERY_USER = gql`
       email
       posts {
         _id
-        category {
-          _id
-          name
-        }
         description
-        image
         postAuthor
         createdAt
       }
@@ -21,28 +16,20 @@ export const QUERY_USER = gql`
   }
 `;
 
-export const QUERY_CATEGORIES = gql`
-  query Categories {
-  categories {
-    _id
-    name
-  }
-}
-`;
-
 export const QUERY_POSTS = gql`
-  query getPosts{
+  query getPosts {
     posts {
+      _id
+      description
+      postAuthor
+      createdAt
+      comments {
         _id
-        category {
-          _id
-          name
-        }
-        description
-        image
-        postAuthor
+        commentText
+        commentAuthor
         createdAt
       }
+    }
   }
 `;
 
@@ -51,11 +38,6 @@ export const QUERY_SINGLE_POST = gql`
     post(postId: $postId) {
       _id
         description
-        image
-        category {
-          _id
-          name
-        }
         postAuthor
         createdAt
       comments {
@@ -82,7 +64,6 @@ export const QUERY_ME = gql`
           name
         }
         description
-        image
         postAuthor
         createdAt
       }
@@ -90,29 +71,4 @@ export const QUERY_ME = gql`
   }
 `;
 
-export const QUERY_THOUGHTS = gql`
-  query getThoughts {
-    thoughts {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-    }
-  }
-`;
 
-export const QUERY_SINGLE_THOUGHT = gql`
-  query getSingleThought($thoughtId: ID!) {
-    thought(thoughtId: $thoughtId) {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-        createdAt
-      }
-    }
-  }
-`;

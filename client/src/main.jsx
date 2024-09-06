@@ -12,6 +12,9 @@ import DisciplinePage from './pages/DisciplinePage.jsx';
 import FaithPage from './pages/FaithPage.jsx';
 import GrowthPage from './pages/GrowthPage.jsx';
 import ConfidencePage from './pages/ConfidencePage.jsx';
+import SuccessStories from './pages/SuccessStories.jsx';
+import Post from './pages/Post.jsx';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -44,6 +47,13 @@ const router = createBrowserRouter([
       {
         path: '/confidence',
         element: <ConfidencePage />
+      },
+      {
+        path: '/success-stories',
+        element: <SuccessStories />
+      }, {
+        path: '/post/:postId',
+        element: <Post />
       }
     ]
   }

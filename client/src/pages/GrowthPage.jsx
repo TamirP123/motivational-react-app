@@ -3,6 +3,12 @@ import '../styles/GrowthPage.css';
 import { FaBrain, FaChartLine, FaLightbulb } from 'react-icons/fa';
 
 const GrowthPage = () => {
+
+    useEffect(() => {
+        // Scroll to the top of the page when the component mounts
+        window.scrollTo(0, 0);
+      }, []);
+      
   const [animatedElements, setAnimatedElements] = useState([]);
   const observerRef = useRef(null);
 
