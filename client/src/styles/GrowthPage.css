@@ -1,0 +1,326 @@
+.growth-page {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+  font-family: 'Arial', sans-serif;
+}
+
+.growth-hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://img.freepik.com/premium-photo/tiny-sprout-growing-against-sunset-backdrop_950481-8891.jpg?uid=R160620524&ga=GA1.1.1261594997.1724037380&semt=ais_hybrid') center/cover no-repeat;
+  height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.growth-hero-content {
+  max-width: 800px;
+  animation: fadeInUp 1s ease-out;
+}
+
+.growth-hero-title {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  color: #ff6600;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.growth-hero-text {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.growth-content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.growth-section {
+  margin-bottom: 60px;
+}
+
+.growth-section-title {
+  font-size: 2.5rem;
+  color: #ff6600;
+  margin-bottom: 30px;
+  text-align: center;
+  position: relative;
+  display: inline-block;
+}
+
+.growth-section-title::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: #ff6600;
+  transition: all 0.3s ease-in-out;
+}
+
+.growth-section-title:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+.growth-quote {
+  font-size: 1.5rem;
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.growth-quote-author {
+  display: block;
+  font-size: 1rem;
+  margin-top: 10px;
+  color: #ff6600;
+}
+
+.growth-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px; /* Add space below the cards */
+}
+
+.growth-card {
+  background-color: #2a2a2a;
+  border-radius: 10px;
+  padding: 30px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+.growth-card:nth-child(1) { animation-delay: 0.1s; }
+.growth-card:nth-child(2) { animation-delay: 0.2s; }
+.growth-card:nth-child(3) { animation-delay: 0.3s; }
+.growth-card:nth-child(4) { animation-delay: 0.4s; }
+.growth-card:nth-child(5) { animation-delay: 0.5s; }
+.growth-card:nth-child(6) { animation-delay: 0.6s; }
+
+.growth-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(255, 102, 0, 0.2);
+}
+
+.growth-card-title {
+  font-size: 1.5rem;
+  color: #ff6600;
+  margin-bottom: 15px;
+}
+
+.growth-card-content {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.join-community {
+  background-color: #2a2a2a;
+  border-radius: 10px;
+  padding: 40px;
+  margin-top: 60px; /* Add space above the section */
+}
+
+.growth-subtitle {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.growth-features {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.growth-feature {
+  flex-basis: calc(33.333% - 20px);
+  text-align: center;
+  animation: slideIn 0.8s ease-out;
+  animation-fill-mode: both;
+}
+
+.growth-feature:nth-child(1) { animation-delay: 0.2s; }
+.growth-feature:nth-child(2) { animation-delay: 0.4s; }
+.growth-feature:nth-child(3) { animation-delay: 0.6s; }
+
+.growth-feature-icon {
+  font-size: 3rem;
+  color: #ff6600;
+  margin-bottom: 20px;
+  animation: pulse 2s infinite;
+}
+
+.growth-feature-title {
+  font-size: 1.3rem;
+  color: #ff6600;
+  margin-bottom: 15px;
+}
+
+.growth-feature-description {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.success-stories-title {
+  font-size: 2rem;
+  color: #ff6600;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.success-stories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.success-story {
+  background-color: #333;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  animation: fadeInUp 0.8s ease-out;
+  animation-fill-mode: both;
+}
+
+.success-story:nth-child(1) { animation-delay: 0.3s; }
+.success-story:nth-child(2) { animation-delay: 0.5s; }
+.success-story:nth-child(3) { animation-delay: 0.7s; }
+
+.success-story:hover {
+  transform: scale(1.03);
+}
+
+.success-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.success-content {
+  padding: 20px;
+}
+
+.quote-icon {
+  font-size: 1.5rem;
+  color: #ff6600;
+  margin-bottom: 10px;
+}
+
+.success-quote {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.success-name {
+  font-size: 0.9rem;
+  color: #ff6600;
+  text-align: right;
+}
+
+/* Animation classes */
+.growth-card, .growth-feature, .success-story, .growth-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.growth-card.animate, .growth-feature.animate, .success-story.animate, .growth-section.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .growth-hero-title {
+    font-size: 2.5rem;
+  }
+
+  .growth-section-title {
+    font-size: 2rem;
+  }
+
+  .growth-feature {
+    flex-basis: 100%;
+  }
+}
+
+.quiz-section {
+  background-color: #2a2a2a;
+  border-radius: 10px;
+  padding: 40px;
+  margin-bottom: 60px;
+}
+
+.quiz-intro, .quiz-result, .quiz-question {
+  text-align: center;
+}
+
+.quiz-start-btn, .quiz-option {
+  background-color: #ff6600;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.quiz-start-btn:hover, .quiz-option:hover {
+  background-color: #e65c00;
+  transform: translateY(-3px);
+}
+
+.quiz-question p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.quiz-result p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+/* Add these new animation keyframes and styles */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

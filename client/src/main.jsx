@@ -10,8 +10,8 @@ import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
 import DisciplinePage from './pages/DisciplinePage.jsx';
 import FaithPage from './pages/FaithPage.jsx';
-
-
+import GrowthPage from './pages/GrowthPage.jsx';
+import ConfidencePage from './pages/ConfidencePage.jsx';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -36,6 +36,14 @@ const router = createBrowserRouter([
       {
         path: '/faith',
         element: <FaithPage />
+      },
+      {
+        path: '/growth',
+        element: <GrowthPage />
+      },
+      {
+        path: '/confidence',
+        element: <ConfidencePage />
       }
     ]
   }
