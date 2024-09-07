@@ -3,7 +3,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { QUERY_USER, QUERY_ME } from "../utils/queries";
 import { SEND_FRIEND_REQUEST, REMOVE_FRIEND } from "../utils/mutations";
-import { FaUser, FaArrowLeft, FaUserPlus, FaUserMinus } from "react-icons/fa";
+import { FaUser, FaArrowLeft, FaUserPlus, FaUserMinus, FaTwitter, FaLinkedin, FaGithub } from "react-icons/fa";
 import Auth from "../utils/auth";
 import "../styles/PublicProfile.css";
 
@@ -15,14 +15,14 @@ const PublicProfile = () => {
 
   const { loading, data, error, refetch } = useQuery(QUERY_USER, {
     variables: { username: userParam },
-    fetchPolicy: "network-only", // This ensures we always fetch fresh data
+    fetchPolicy: "network-only", 
     onError: (error) => {
       console.error("GraphQL error:", error);
     },
   });
 
   const { data: userData, refetch: refetchMe } = useQuery(QUERY_ME, {
-    fetchPolicy: "network-only", // This ensures we always fetch fresh data
+    fetchPolicy: "network-only", 
   });
 
   const [sendFriendRequest] = useMutation(SEND_FRIEND_REQUEST);
@@ -150,7 +150,7 @@ const PublicProfile = () => {
         </div>
       )}
       <button onClick={() => navigate(-1)} className="back-button">
-        <FaArrowLeft /> Back to post
+        <FaArrowLeft /> Back
       </button>
       <div className="profile-banner">
         <div className="profile-image-container">
@@ -167,10 +167,22 @@ const PublicProfile = () => {
           )}
         </div>
         <h2 className="profile-username">{user.username}</h2>
-        <p className="profile-stats">
-          <span>{user.posts?.length || 0} posts</span>
-        </p>
+        <div className="profile-stats">
+          <div className="stat">
+            <span className="stat-value">{user.posts?.length || 0}</span>
+            <span className="stat-label">Posts</span>
+          </div>
+          <div className="stat">
+            <span className="stat-value">{user.friends?.length || 0}</span>
+            <span className="stat-label">Friends</span>
+          </div>
+        </div>
         {renderRelationshipButton()}
+        <div className="social-icons">
+          <a href="#" className="social-icon" aria-label="Twitter"><FaTwitter /></a>
+          <a href="#" className="social-icon" aria-label="LinkedIn"><FaLinkedin /></a>
+          <a href="#" className="social-icon" aria-label="GitHub"><FaGithub /></a>
+        </div>
       </div>
       <div className="posts-section">
         <h3 className="posts-title">Success Stories</h3>
@@ -179,11 +191,10 @@ const PublicProfile = () => {
             <div key={post._id} className="post-item">
               <Link to={`/post/${post._id}`} className="post-link">
                 <p className="post-description">{post.description}</p>
+                <p className="post-date">
+                  {new Date(parseInt(post.createdAt)).toLocaleString()}
+                </p>
               </Link>
-              <p className="post-date">
-                Created at:{" "}
-                {new Date(parseInt(post.createdAt)).toLocaleString()}
-              </p>
             </div>
           ))
         ) : (

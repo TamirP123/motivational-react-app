@@ -4,14 +4,14 @@ import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_POSTS } from "../utils/queries";
 import { ADD_POST } from "../utils/mutations";
 import Auth from "../utils/auth";
-import { FaUser } from 'react-icons/fa';
+import { FaUser } from "react-icons/fa";
 import "../styles/SuccessStories.css";
 
 const SuccessStories = () => {
   const [description, setDescription] = useState("");
   const { loading, data, refetch } = useQuery(QUERY_POSTS);
   const [addPost] = useMutation(ADD_POST, {
-    refetchQueries: [{ query: QUERY_POSTS }]
+    refetchQueries: [{ query: QUERY_POSTS }],
   });
 
   const handleSubmit = async (e) => {
@@ -75,12 +75,18 @@ const SuccessStories = () => {
                         <FaUser />
                       </div>
                     )}
-                    <div className="profile-hover-notification">View Profile</div>
+                    <div className="profile-hover-notification">
+                      View Profile
+                    </div>
                   </div>
-                  <h3 className="author-username">{post.postAuthor ? post.postAuthor.username : 'Unknown User'}</h3>
+                  <h3 className="author-username">
+                    {post.postAuthor
+                      ? post.postAuthor.username
+                      : "Unknown User"}
+                  </h3>
                 </Link>
                 <Link to={`/post/${post._id}`} className="post-link">
-                  <div className="post-description-box">
+                  <div className="post-description-container">
                     <p className="post-description">{post.description}</p>
                   </div>
                 </Link>

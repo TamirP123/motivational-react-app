@@ -14,15 +14,15 @@ const resolvers = {
             path: "friendRequests",
             populate: [
               { path: "sender", select: "_id username" },
-              { path: "receiver", select: "_id username" }
-            ]
+              { path: "receiver", select: "_id username" },
+            ],
           })
           .populate("friends");
-        
+
         if (!user) {
           throw new Error("User not found");
         }
-        
+
         return user;
       } catch (error) {
         console.error("Error in user resolver:", error);
@@ -62,11 +62,10 @@ const resolvers = {
     myFriendRequests: async (parent, args, context) => {
       if (context.user) {
         const friendRequests = await FriendRequest.find({
-          $or: [
-            { sender: context.user._id },
-            { receiver: context.user._id }
-          ]
-        }).populate('sender').populate('receiver');
+          $or: [{ sender: context.user._id }, { receiver: context.user._id }],
+        })
+          .populate("sender")
+          .populate("receiver");
         console.log("Friend requests found:", friendRequests);
         return friendRequests;
       }
@@ -207,9 +206,9 @@ const resolvers = {
           const existingRequest = await FriendRequest.findOne({
             $or: [
               { sender: context.user._id, receiver: receiverId },
-              { sender: receiverId, receiver: context.user._id }
+              { sender: receiverId, receiver: context.user._id },
             ],
-            status: 'pending'
+            status: "pending",
           });
 
           if (existingRequest) {
@@ -219,18 +218,22 @@ const resolvers = {
           const newRequest = new FriendRequest({
             sender: context.user._id,
             receiver: receiverId,
-            status: 'pending'
+            status: "pending",
           });
 
           await newRequest.save();
 
           // Update both users' friendRequests arrays
-          await User.findByIdAndUpdate(context.user._id, { $push: { friendRequests: newRequest._id } });
-          await User.findByIdAndUpdate(receiverId, { $push: { friendRequests: newRequest._id } });
+          await User.findByIdAndUpdate(context.user._id, {
+            $push: { friendRequests: newRequest._id },
+          });
+          await User.findByIdAndUpdate(receiverId, {
+            $push: { friendRequests: newRequest._id },
+          });
 
           const populatedRequest = await FriendRequest.findById(newRequest._id)
-            .populate('sender', '_id username')
-            .populate('receiver', '_id username');
+            .populate("sender", "_id username")
+            .populate("receiver", "_id username");
 
           return populatedRequest;
         } catch (error) {
@@ -251,10 +254,14 @@ const resolvers = {
         friendRequest.status = status;
         await friendRequest.save();
 
-        if (status === 'accepted') {
+        if (status === "accepted") {
           // Add each user to the other's friends list
-          await User.findByIdAndUpdate(friendRequest.sender, { $addToSet: { friends: friendRequest.receiver } });
-          await User.findByIdAndUpdate(friendRequest.receiver, { $addToSet: { friends: friendRequest.sender } });
+          await User.findByIdAndUpdate(friendRequest.sender, {
+            $addToSet: { friends: friendRequest.receiver },
+          });
+          await User.findByIdAndUpdate(friendRequest.receiver, {
+            $addToSet: { friends: friendRequest.sender },
+          });
         }
 
         return friendRequest;
@@ -267,16 +274,15 @@ const resolvers = {
           context.user._id,
           { $pull: { friends: friendId } },
           { new: true }
-        ).populate('friends');
+        ).populate("friends");
 
-        await User.findByIdAndUpdate(
-          friendId,
-          { $pull: { friends: context.user._id } }
-        );
+        await User.findByIdAndUpdate(friendId, {
+          $pull: { friends: context.user._id },
+        });
 
         return updatedUser;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError("You need to be logged in!");
     },
   },
 };
