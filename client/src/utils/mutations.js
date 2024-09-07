@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
@@ -13,16 +13,8 @@ export const LOGIN = gql`
 `;
 
 export const ADD_USER = gql`
-  mutation addUser(
-    $username: String!
-    $email: String!
-    $password: String!
-  ) {
-    addUser(
-      username: $username
-      email: $email
-      password: $password
-    ) {
+  mutation addUser($username: String!, $email: String!, $password: String!) {
+    addUser(username: $username, email: $email, password: $password) {
       token
       user {
         _id
@@ -33,22 +25,22 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_POST = gql`
-mutation addPost($description: String!) {
-  addPost(description: $description) {
-    _id
-    description
-    createdAt
-    postAuthor {
+  mutation addPost($description: String!) {
+    addPost(description: $description) {
       _id
-      username
-      profileImage
-    }
-    comments {
-      _id
-      commentText
+      description
+      createdAt
+      postAuthor {
+        _id
+        username
+        profileImage
+      }
+      comments {
+        _id
+        commentText
+      }
     }
   }
-}
 `;
 
 export const ADD_COMMENT = gql`
@@ -92,8 +84,50 @@ export const REMOVE_POST = gql`
   mutation removePost($postId: ID!) {
     removePost(postId: $postId) {
       _id
-      description
-      postAuthor {
+    }
+  }
+`;
+
+export const SEND_FRIEND_REQUEST = gql`
+  mutation sendFriendRequest($receiverId: ID!) {
+    sendFriendRequest(receiverId: $receiverId) {
+      _id
+      sender {
+        _id
+        username
+      }
+      receiver {
+        _id
+        username
+      }
+      status
+    }
+  }
+`;
+
+export const RESPOND_FRIEND_REQUEST = gql`
+  mutation respondFriendRequest($requestId: ID!, $status: String!) {
+    respondFriendRequest(requestId: $requestId, status: $status) {
+      _id
+      sender {
+        _id
+        username
+      }
+      receiver {
+        _id
+        username
+      }
+      status
+    }
+  }
+`;
+
+export const REMOVE_FRIEND = gql`
+  mutation removeFriend($friendId: ID!) {
+    removeFriend(friendId: $friendId) {
+      _id
+      username
+      friends {
         _id
         username
       }

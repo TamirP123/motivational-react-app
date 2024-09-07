@@ -1,0 +1,166 @@
+.public-profile {
+  background-color: #1a1a1a;
+  color: #d3d3d3;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: #ff8c00;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.back-button:hover {
+  text-decoration: underline;
+}
+
+/* Remove or comment out this block */
+/*
+.back-button::before {
+  content: '←';
+  margin-right: 5px;
+}
+*/
+
+/* Keep this rule to add space between the icon and text */
+.back-button svg {
+  margin-right: 5px;
+}
+
+.profile-banner {
+  background-color: #2a2a2a;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-image-container {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 20px;
+}
+
+.profile-image,
+.profile-image-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-image-placeholder {
+  background-color: #3a3a3a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 60px;
+  color: #ff8c00;
+}
+
+.profile-username {
+  font-size: 24px;
+  color: #ff8c00;
+  margin-bottom: 10px;
+}
+
+.profile-stats {
+  font-size: 16px;
+}
+
+.posts-section {
+  background-color: #2a2a2a;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.posts-title {
+  font-size: 20px;
+  color: #ff8c00;
+  margin-bottom: 20px;
+}
+
+.post-item {
+  background-color: #3a3a3a;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+}
+
+.post-link {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.post-link:hover {
+  color: #ff8c00;
+}
+
+.post-description {
+  margin-bottom: 10px;
+}
+
+.post-date {
+  font-size: 14px;
+  color: #a0a0a0;
+}
+
+.no-posts {
+  text-align: center;
+  color: #a0a0a0;
+  font-style: italic;
+}
+
+.friend-request-button {
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  position: relative;
+  z-index: 10;
+  transition: background-color 0.3s ease;
+}
+
+.friend-request-button svg {
+  margin-right: 8px;
+}
+
+.friend-request-button.add-friend {
+  background-color: #ff8c00; /* Orange theme color */
+}
+
+.friend-request-button.add-friend:hover {
+  background-color: #e67e00; /* Darker orange on hover */
+}
+
+.friend-request-button.remove-friend {
+  background-color: #f44336; /* Red color for remove friend */
+}
+
+.friend-request-button.remove-friend:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
+
+.friend-request-button:disabled {
+  background-color: #4a4a4a; /* Dark grey for pending state */
+  color: #a0a0a0; /* Light grey text for pending state */
+  cursor: not-allowed;
+}
+
+.notification.info {
+  background-color: #17a2b8;
+  color: white;
+}

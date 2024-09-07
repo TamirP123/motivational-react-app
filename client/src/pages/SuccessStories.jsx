@@ -19,9 +19,16 @@ const SuccessStories = () => {
     try {
       await addPost({ variables: { description } });
       setDescription("");
-      await refetch(); // Refetch the posts after adding a new one
+      await refetch();
     } catch (err) {
       console.error(err);
+    }
+  };
+
+  const handleDescriptionChange = (e) => {
+    const input = e.target.value;
+    if (input.length <= 100) {
+      setDescription(input);
     }
   };
 
@@ -37,10 +44,12 @@ const SuccessStories = () => {
           <form onSubmit={handleSubmit} className="story-form">
             <textarea
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="Share your success story..."
+              onChange={handleDescriptionChange}
+              placeholder="Share your success story... (max 100 characters)"
               required
+              maxLength={100}
             />
+            <div className="character-count">{description.length}/100</div>
             <button type="submit">Post Story</button>
           </form>
         )}
@@ -49,12 +58,11 @@ const SuccessStories = () => {
             <p className="no-stories">No Success Stories Available</p>
           ) : (
             posts.map((post) => (
-              <Link
-                to={`/post/${post._id}`}
-                key={post._id}
-                className="story-card"
-              >
-                <div className="story-header">
+              <div key={post._id} className="story-card">
+                <Link
+                  to={`/profile/${post.postAuthor.username}`}
+                  className="story-header"
+                >
                   <div className="profile-image-container">
                     {post.postAuthor && post.postAuthor.profileImage ? (
                       <img
@@ -67,14 +75,17 @@ const SuccessStories = () => {
                         <FaUser />
                       </div>
                     )}
+                    <div className="profile-hover-notification">View Profile</div>
                   </div>
                   <h3 className="author-username">{post.postAuthor ? post.postAuthor.username : 'Unknown User'}</h3>
-                </div>
-                <p className="post-description">
-                  {post.description}
-                </p>
+                </Link>
+                <Link to={`/post/${post._id}`} className="post-link">
+                  <div className="post-description-box">
+                    <p className="post-description">{post.description}</p>
+                  </div>
+                </Link>
                 <span className="timestamp">{post.createdAt}</span>
-              </Link>
+              </div>
             ))
           )}
         </div>

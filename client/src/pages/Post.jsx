@@ -1,26 +1,30 @@
-import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_SINGLE_POST } from '../utils/queries';
-import { ADD_COMMENT, REMOVE_COMMENT } from '../utils/mutations';
-import Auth from '../utils/auth';
-import { FaUser } from 'react-icons/fa';
-import '../styles/Post.css';
+import React, { useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import { useQuery, useMutation } from "@apollo/client";
+import { QUERY_SINGLE_POST } from "../utils/queries";
+import { ADD_COMMENT, REMOVE_COMMENT } from "../utils/mutations";
+import Auth from "../utils/auth";
+import { FaUser, FaArrowLeft } from "react-icons/fa";
+import "../styles/Post.css";
 
 const Post = () => {
   const { postId } = useParams();
-  const [commentText, setCommentText] = useState('');
+  const [commentText, setCommentText] = useState("");
 
   const { loading, data, error } = useQuery(QUERY_SINGLE_POST, {
     variables: { postId: postId },
   });
 
   const [addComment] = useMutation(ADD_COMMENT, {
-    refetchQueries: [{ query: QUERY_SINGLE_POST, variables: { postId: postId } }],
+    refetchQueries: [
+      { query: QUERY_SINGLE_POST, variables: { postId: postId } },
+    ],
   });
 
   const [removeComment] = useMutation(REMOVE_COMMENT, {
-    refetchQueries: [{ query: QUERY_SINGLE_POST, variables: { postId: postId } }],
+    refetchQueries: [
+      { query: QUERY_SINGLE_POST, variables: { postId: postId } },
+    ],
   });
 
   const post = data?.post || {};
@@ -31,7 +35,7 @@ const Post = () => {
       await addComment({
         variables: { postId, commentText },
       });
-      setCommentText('');
+      setCommentText("");
     } catch (err) {
       console.error(err);
     }
@@ -54,20 +58,31 @@ const Post = () => {
   return (
     <div className="post-page">
       <Link to="/success-stories" className="back-button">
-        Back to Success Stories
+        <FaArrowLeft /> Back to Success Stories
       </Link>
       <div className="post-content">
         <div className="post-header">
           <div className="post-author-info">
-            {post.postAuthor?.profileImage ? (
-              <img src={post.postAuthor.profileImage} alt={post.postAuthor.username} className="author-image" />
-            ) : (
-              <div className="author-image-placeholder">
-                <FaUser />
-              </div>
-            )}
+            <Link to={`/profile/${post.postAuthor?.username}`} className="author-link">
+              {post.postAuthor?.profileImage ? (
+                <img
+                  src={post.postAuthor.profileImage}
+                  alt={post.postAuthor.username}
+                  className="author-image"
+                />
+              ) : (
+                <div className="author-image-placeholder">
+                  <FaUser />
+                </div>
+              )}
+              <div className="profile-hover-notification">View Profile</div>
+            </Link>
             <div className="author-details">
-              <h2>{post.postAuthor?.username || 'Unknown User'}'s Success Story</h2>
+              <Link to={`/profile/${post.postAuthor?.username}`} className="author-link">
+                <h2>
+                  {post.postAuthor?.username || "Unknown User"}'s Success Story
+                </h2>
+              </Link>
               <span className="post-timestamp">{post.createdAt}</span>
             </div>
           </div>
@@ -81,21 +96,28 @@ const Post = () => {
             <div key={comment._id} className="comment">
               <div className="comment-header">
                 <span className="comment-author">{comment.commentAuthor}</span>
+                <span className="comment-author">
+                  {comment.commentProfileImage}
+                </span>
                 <span className="comment-timestamp">{comment.createdAt}</span>
               </div>
               <p className="comment-text">{comment.commentText}</p>
-              {Auth.loggedIn() && Auth.getProfile().authenticatedPerson.username === comment.commentAuthor && (
-                <button 
-                  className="delete-comment" 
-                  onClick={() => handleDeleteComment(comment._id)}
-                >
-                  Delete
-                </button>
-              )}
+              {Auth.loggedIn() &&
+                Auth.getProfile().authenticatedPerson.username ===
+                  comment.commentAuthor && (
+                  <button
+                    className="delete-comment"
+                    onClick={() => handleDeleteComment(comment._id)}
+                  >
+                    Delete
+                  </button>
+                )}
             </div>
           ))
         ) : (
-          <p className="no-comments">No comments yet. Be the first to comment!</p>
+          <p className="no-comments">
+            No comments yet. Be the first to comment!
+          </p>
         )}
       </div>
       {Auth.loggedIn() && (

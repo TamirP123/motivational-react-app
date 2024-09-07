@@ -1,6 +1,6 @@
-const { Schema, model } = require('mongoose');
-const bcrypt = require('bcrypt');
-const Post = require('./Post');
+const { Schema, model } = require("mongoose");
+const bcrypt = require("bcrypt");
+const Post = require("./Post");
 
 const userSchema = new Schema({
   username: {
@@ -15,25 +15,37 @@ const userSchema = new Schema({
     minlength: 5,
   },
   email: {
-    type: String, 
+    type: String,
     required: true,
-    trim: true
+    trim: true,
   },
   // posts: [Post.schema],
   posts: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Post'
+      ref: "Post",
     },
   ],
   profileImage: {
     type: String,
-    default: 'https://example.com/default-profile-image.jpg'
+    default: "https://example.com/default-profile-image.jpg",
   },
+  friendRequests: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "FriendRequest",
+    },
+  ],
+  friends: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
-userSchema.pre('save', async function(next) {
-  if (this.isNew || this.isModified('password')) {
+userSchema.pre("save", async function (next) {
+  if (this.isNew || this.isModified("password")) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
@@ -41,10 +53,10 @@ userSchema.pre('save', async function(next) {
   next();
 });
 
-userSchema.methods.isCorrectPassword = async function(password) {
+userSchema.methods.isCorrectPassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
-const User = model('User', userSchema);
+const User = model("User", userSchema);
 
 module.exports = User;

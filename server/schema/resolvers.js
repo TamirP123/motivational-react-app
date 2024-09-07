@@ -1,4 +1,4 @@
-const { User, Post } = require("../models");
+const { User, Post, FriendRequest } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
@@ -7,38 +7,70 @@ const resolvers = {
       return User.find().populate("posts");
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate("posts");
+      try {
+        const user = await User.findOne({ username })
+          .populate("posts")
+          .populate({
+            path: "friendRequests",
+            populate: [
+              { path: "sender", select: "_id username" },
+              { path: "receiver", select: "_id username" }
+            ]
+          })
+          .populate("friends");
+        
+        if (!user) {
+          throw new Error("User not found");
+        }
+        
+        return user;
+      } catch (error) {
+        console.error("Error in user resolver:", error);
+        throw new Error("Failed to fetch user data");
+      }
     },
     posts: async (parent, { username }) => {
       try {
         const params = username ? { username } : {};
-        const posts = await Post.find(params)
-          .sort({ createdAt: -1 })
-          .populate({
-            path: 'postAuthor',
-            select: 'username profileImage'
-          });
-        console.log('Fetched posts:', posts);
+        const posts = await Post.find(params).sort({ createdAt: -1 }).populate({
+          path: "postAuthor",
+          select: "username profileImage",
+        });
+        console.log("Fetched posts:", posts);
         return posts;
       } catch (error) {
-        console.error('Error fetching posts:', error);
-        throw new Error('Failed to fetch posts');
+        console.error("Error fetching posts:", error);
+        throw new Error("Failed to fetch posts");
       }
     },
     post: async (parent, { postId }) => {
       return Post.findOne({ _id: postId }).populate({
-        path: 'postAuthor',
-        select: 'username profileImage'
+        path: "postAuthor",
+        select: "username profileImage",
       });
     },
     me: async (parent, args, context) => {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
-          .select('-__v -password')
-          .populate('posts');
+          .select("-__v -password")
+          .populate("posts")
+          .populate("friends");
         return userData;
       }
-      throw new AuthenticationError('Not logged in');
+      throw new AuthenticationError("Not logged in");
+    },
+    myFriendRequests: async (parent, args, context) => {
+      if (context.user) {
+        const friendRequests = await FriendRequest.find({
+          $or: [
+            { sender: context.user._id },
+            { receiver: context.user._id }
+          ]
+        }).populate('sender').populate('receiver');
+        console.log("Friend requests found:", friendRequests);
+        return friendRequests;
+      }
+      throw new AuthenticationError("Not logged in");
     },
   },
 
@@ -81,15 +113,15 @@ const resolvers = {
           );
 
           const populatedPost = await Post.findById(post._id).populate({
-            path: 'postAuthor',
-            select: 'username profileImage'
+            path: "postAuthor",
+            select: "username profileImage",
           });
 
-          console.log('Created post:', populatedPost);
+          console.log("Created post:", populatedPost);
           return populatedPost;
         } catch (error) {
-          console.error('Error creating post:', error);
-          throw new Error('Failed to create post');
+          console.error("Error creating post:", error);
+          throw new Error("Failed to create post");
         }
       }
       throw AuthenticationError;
@@ -120,18 +152,19 @@ const resolvers = {
           });
 
           if (!post) {
-            throw new Error('Post not found or you are not authorized to delete this post');
+            throw new Error(
+              "Post not found or you are not authorized to delete this post"
+            );
           }
 
-          await User.findByIdAndUpdate(
-            context.user._id,
-            { $pull: { posts: postId } }
-          );
+          await User.findByIdAndUpdate(context.user._id, {
+            $pull: { posts: postId },
+          });
 
           return post;
         } catch (error) {
-          console.error('Error removing post:', error);
-          throw new Error('Failed to remove post');
+          console.error("Error removing post:", error);
+          throw new Error("Failed to remove post");
         }
       }
       throw AuthenticationError;
@@ -162,6 +195,88 @@ const resolvers = {
         );
       }
       throw AuthenticationError;
+    },
+    sendFriendRequest: async (parent, { receiverId }, context) => {
+      if (context.user) {
+        try {
+          const receiver = await User.findById(receiverId);
+          if (!receiver) {
+            throw new Error("User not found");
+          }
+
+          const existingRequest = await FriendRequest.findOne({
+            $or: [
+              { sender: context.user._id, receiver: receiverId },
+              { sender: receiverId, receiver: context.user._id }
+            ],
+            status: 'pending'
+          });
+
+          if (existingRequest) {
+            throw new Error("Friend request already sent");
+          }
+
+          const newRequest = new FriendRequest({
+            sender: context.user._id,
+            receiver: receiverId,
+            status: 'pending'
+          });
+
+          await newRequest.save();
+
+          // Update both users' friendRequests arrays
+          await User.findByIdAndUpdate(context.user._id, { $push: { friendRequests: newRequest._id } });
+          await User.findByIdAndUpdate(receiverId, { $push: { friendRequests: newRequest._id } });
+
+          const populatedRequest = await FriendRequest.findById(newRequest._id)
+            .populate('sender', '_id username')
+            .populate('receiver', '_id username');
+
+          return populatedRequest;
+        } catch (error) {
+          console.error("Error in sendFriendRequest resolver:", error);
+          throw new Error(error.message);
+        }
+      }
+      throw new AuthenticationError("Not logged in");
+    },
+
+    respondFriendRequest: async (parent, { requestId, status }, context) => {
+      if (context.user) {
+        const friendRequest = await FriendRequest.findById(requestId);
+        if (!friendRequest) {
+          throw new Error("Friend request not found");
+        }
+
+        friendRequest.status = status;
+        await friendRequest.save();
+
+        if (status === 'accepted') {
+          // Add each user to the other's friends list
+          await User.findByIdAndUpdate(friendRequest.sender, { $addToSet: { friends: friendRequest.receiver } });
+          await User.findByIdAndUpdate(friendRequest.receiver, { $addToSet: { friends: friendRequest.sender } });
+        }
+
+        return friendRequest;
+      }
+      throw new AuthenticationError("Not logged in");
+    },
+    removeFriend: async (parent, { friendId }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findByIdAndUpdate(
+          context.user._id,
+          { $pull: { friends: friendId } },
+          { new: true }
+        ).populate('friends');
+
+        await User.findByIdAndUpdate(
+          friendId,
+          { $pull: { friends: context.user._id } }
+        );
+
+        return updatedUser;
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
   },
 };

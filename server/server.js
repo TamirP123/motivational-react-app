@@ -7,9 +7,19 @@ const path = require('path');
 const { typeDefs, resolvers } = require('./schema');
 const db = require('./config/connection');
 const { authMiddleware } = require('./utils/auth')
-const server = new ApolloServer({ 
-    typeDefs, 
-    resolvers
+const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context: async ({ req }) => {
+        // Get the user token from the headers
+        const token = req.headers.authorization || '';
+
+        // Try to retrieve a user with the token
+        const user = await getUser(token);
+
+        // Add the user to the context
+        return { user };
+    },
 });
 
 const startApolloServer = async () => {

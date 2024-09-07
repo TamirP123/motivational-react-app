@@ -7,16 +7,18 @@ body {
 }
 
 .success-stories {
-  max-width: 600px;
+  max-width: 800px;
   width: 100%;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #1a1a1a;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #2a2a2a;
   color: #ffffff;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 160px);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .stories-content {
@@ -27,47 +29,56 @@ body {
 
 h1 {
   color: #ff8c00;
-  font-size: 28px;
+  font-size: 32px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .story-form {
-  margin-bottom: 30px;
-  background-color: #2a2a2a;
-  padding: 20px;
+  margin-bottom: 40px;
+  background-color: #333333;
+  padding: 25px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .story-form textarea {
   width: 100%;
-  height: 100px;
-  padding: 12px;
-  border: 1px solid #444444;
+  height: 120px;
+  padding: 15px;
+  border: 1px solid #555555;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 16px;
   resize: none;
-  background-color: #333333;
+  background-color: #444444;
   color: #ffffff;
+  transition: border-color 0.3s ease;
+}
+
+.story-form textarea:focus {
+  border-color: #ff8c00;
+  outline: none;
 }
 
 .story-form button {
   background-color: #ff8c00;
   color: #ffffff;
   border: none;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s;
-  margin-top: 10px;
+  transition: background-color 0.3s, transform 0.2s;
+  margin-top: 15px;
 }
 
 .story-form button:hover {
   background-color: #ff9f33;
+  transform: translateY(-2px);
 }
 
 .stories-list {
@@ -77,36 +88,40 @@ h1 {
 }
 
 .story-card {
-  background-color: #2a2a2a;
+  background-color: #333333;
   border: 1px solid #444444;
   border-radius: 8px;
   overflow: hidden;
   text-decoration: none;
   color: #ffffff;
-  transition: box-shadow 0.3s;
+  transition: box-shadow 0.3s, transform 0.2s;
   display: flex;
   flex-direction: column;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 16px;
+  padding: 20px;
   margin-bottom: 20px;
   position: relative;
 }
 
 .story-card:hover {
-  box-shadow: 0 4px 8px rgba(255, 140, 0, 0.2);
+  box-shadow: 0 6px 12px rgba(255, 140, 0, 0.2);
+  transform: translateY(-3px);
 }
 
 .story-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
+  position: relative;
+  text-decoration: none;
 }
 
 .profile-image-container {
-  width: 64px;
-  height: 64px;
-  margin-bottom: 8px;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px;
+  position: relative;
 }
 
 .profile-image,
@@ -129,109 +144,88 @@ h1 {
 
 .author-username {
   color: #ffffff;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   margin: 0;
   text-align: center;
+  transition: color 0.3s ease;
+}
+
+.story-header:hover .author-username {
+  color: #ff8c00;
 }
 
 .post-description {
-  font-size: 14px;
-  margin-bottom: 16px;
-  line-height: 1.4;
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0;
+  color: #ffffff;
+}
+
+.post-description-box {
+  background-color: #444444;
+  border-left: 4px solid #ff8c00;
+  border-radius: 0 8px 8px 0;
+  padding: 15px;
+  margin: 15px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .story-card .timestamp {
-  font-size: 12px;
+  font-size: 14px;
   color: #999999;
-  position: absolute;
-  bottom: 8px;
-  right: 16px;
+  margin-top: 10px;
+  text-align: right;
 }
 
 .no-stories {
   text-align: center;
   color: #999999;
-  font-size: 14px;
-  margin-top: 20px;
-}
-
-.comments {
-  margin-top: 20px;
-  border-top: 1px solid #444444;
-  padding-top: 15px;
-}
-
-.comments h4 {
-  color: #ff6600;
-  margin-bottom: 10px;
-}
-
-.comment {
-  background-color: #3a3a3a;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 10px;
-}
-
-.comment p {
-  margin-bottom: 5px;
-}
-
-.comment-author {
-  font-size: 0.9em;
-  color: #999999;
+  font-size: 18px;
+  margin-top: 30px;
   font-style: italic;
 }
 
-.comment-form {
-  margin-top: 20px;
+.character-count {
+  text-align: right;
+  color: #999999;
+  font-size: 14px;
+  margin-top: 5px;
 }
 
-.comment-form textarea {
-  width: 100%;
-  height: 80px;
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: #444444;
-  border: 1px solid #555555;
+.profile-hover-notification {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 140, 0, 0.9);
   color: #ffffff;
-  resize: vertical;
-  border-radius: 5px;
-  font-size: 0.9em;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  white-space: nowrap;
 }
 
-.comment-form button {
-  background-color: #ff6600;
-  color: #ffffff;
-  border: none;
-  padding: 8px 15px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-  border-radius: 5px;
-  font-size: 0.9em;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.comment-form button:hover {
-  background-color: #ff8533;
-  transform: translateY(-2px);
+.story-header:hover .profile-hover-notification {
+  opacity: 1;
 }
 
 @media (max-width: 768px) {
   body {
-    padding-top: 60px; /* Adjust for smaller screens if needed */
+    padding-top: 60px;
   }
 
   .success-stories {
-    padding: 10px;
-    min-height: calc(100vh - 60px); /* Subtract navbar height for mobile */
-    padding: 10px;
+    margin: 20px auto;
+    padding: 20px;
+    min-height: calc(100vh - 100px);
   }
 
   h1 {
-    font-size: 24px;
+    font-size: 28px;
   }
 
   .story-card {

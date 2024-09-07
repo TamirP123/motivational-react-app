@@ -10,8 +10,23 @@ export const QUERY_USER = gql`
       posts {
         _id
         description
-        postAuthor
         createdAt
+      }
+      friendRequests {
+        _id
+        sender {
+          _id
+          username
+        }
+        receiver {
+          _id
+          username
+        }
+        status
+      }
+      friends {
+        _id
+        username
       }
     }
   }
@@ -71,6 +86,27 @@ export const QUERY_ME = gql`
         description
         createdAt
       }
+      friends {
+        _id
+        username
+      }
+    }
+  }
+`;
+
+export const QUERY_FRIEND_REQUESTS = gql`
+  query myFriendRequests {
+    myFriendRequests {
+      _id
+      sender {
+        _id
+        username
+      }
+      receiver {
+        _id
+        username
+      }
+      status
     }
   }
 `;

@@ -6,6 +6,15 @@ type User {
   password: String!
   profileImage: String
   posts: [Post]
+  friendRequests: [FriendRequest]
+  friends: [User]
+}
+
+type FriendRequest {
+  _id: ID!
+  sender: User!
+  receiver: User!
+  status: String!
 }
 
 type Post {
@@ -29,6 +38,8 @@ type Query {
   posts(username: String): [Post]
   post(postId: ID!): Post
   me: User
+  myFriendRequests: [FriendRequest]
+
 }
 
 type Auth {
@@ -44,6 +55,9 @@ type Mutation {
   removePost(postId: ID!): Post
   removeComment(postId: ID!, commentId: ID!): Post
   updateProfileImage(profileImage: String!): User
+  sendFriendRequest(receiverId: ID!): FriendRequest
+  respondFriendRequest(requestId: ID!, status: String!): FriendRequest
+  removeFriend(friendId: ID!): User
 }
 `;
 
