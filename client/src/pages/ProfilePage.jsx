@@ -1,22 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
-import { UPDATE_PROFILE_IMAGE } from "../utils/mutations";
+import { UPDATE_PROFILE_IMAGE, UPDATE_SOCIAL_LINKS } from "../utils/mutations";
 import Auth from "../utils/auth";
 import { Link } from "react-router-dom";
-import { FaUser, FaEdit, FaTrash } from "react-icons/fa";
+import { FaUser, FaEdit, FaTrash, FaTwitter, FaLinkedin, FaGithub } from "react-icons/fa";
 import "../styles/ProfilePage.css";
 import CloudinaryUploadWidget from "../components/CloudinaryUploadWidget";
 
 const ProfilePage = () => {
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const { loading, data, refetch } = useQuery(QUERY_ME);
   const [updateProfileImage] = useMutation(UPDATE_PROFILE_IMAGE);
+  const [socialLinks, setSocialLinks] = useState({
+    twitter: "",
+    linkedin: "",
+    github: "",
+  });
+  const [updateSocialLinks] = useMutation(UPDATE_SOCIAL_LINKS);
   const user = data?.me || {};
+  const [notification, setNotification] = useState(null);
 
   const handleImageUpload = async (imageUrl) => {
     try {
@@ -29,12 +35,56 @@ const ProfilePage = () => {
     }
   };
 
+  useEffect(() => {
+    if (data?.me?.socialLinks) {
+      setSocialLinks({
+        twitter: data.me.socialLinks.twitter || "",
+        linkedin: data.me.socialLinks.linkedin || "",
+        github: data.me.socialLinks.github || "",
+      });
+    }
+  }, [data]);
+
+  const handleSocialLinkChange = (e) => {
+    const { name, value } = e.target;
+    setSocialLinks((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSocialLinksSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Submitting social links:", socialLinks);
+    try {
+      const { data } = await updateSocialLinks({ 
+        variables: { input: socialLinks },
+      });
+      if (data && data.updateSocialLinks) {
+        console.log("Social links updated successfully:", data.updateSocialLinks);
+        setNotification({ type: 'success', message: 'Social links updated successfully!' });
+        setTimeout(() => setNotification(null), 3000); // Clear notification after 3 seconds
+        refetch();
+      } else {
+        console.error("Unexpected response structure:", data);
+        setNotification({ type: 'error', message: 'Failed to update social links. Please try again.' });
+        setTimeout(() => setNotification(null), 3000);
+      }
+    } catch (err) {
+      console.error("Error updating social links:", err);
+      setNotification({ type: 'error', message: 'Failed to update social links. Please try again.' });
+      setTimeout(() => setNotification(null), 3000);
+    }
+  };
+
   if (loading) {
     return <div className="profile-page loading">Loading...</div>;
   }
 
   return (
     <div className="profile-page">
+      {notification && (
+        <div className={`notification ${notification.type}`}>
+          {notification.message}
+        </div>
+      )}
       <div className="profile-header">
         <div className="profile-image-container">
           {user.profileImage ? (
@@ -69,42 +119,70 @@ const ProfilePage = () => {
       </div>
 
       <div className="profile-content">
-        <div className="friends-section">
-          <h2>Friends</h2>
-          {user.friends && user.friends.length > 0 ? (
-            <ul className="friends-list">
-              {user.friends.map((friend) => (
-                <li key={friend._id} className="friend-item">
-                  <Link to={`/profile/${friend.username}`}>
-                    <div className="friend-image-container">
-                      {friend.profileImage ? (
-                        <img
-                          src={friend.profileImage}
-                          alt={friend.username}
-                          className="friend-image"
-                        />
-                      ) : (
-                        <div className="friend-image-placeholder">
-                          <FaUser />
-                        </div>
-                      )}
-                    </div>
-                    <span className="friend-username">{friend.username}</span>
-                  </Link>
-                </li>
+        <div className="sidebar">
+          <div className="friends-section">
+            <h2>Friends</h2>
+            {user.friends && user.friends.length > 0 ? (
+              <ul className="friends-list">
+                {user.friends.map((friend) => (
+                  <li key={friend._id} className="friend-item">
+                    <Link to={`/profile/${friend.username}`}>
+                      <div className="friend-image-container">
+                        {friend.profileImage ? (
+                          <img
+                            src={friend.profileImage}
+                            alt={friend.username}
+                            className="friend-image"
+                          />
+                        ) : (
+                          <div className="friend-image-placeholder">
+                            <FaUser />
+                          </div>
+                        )}
+                      </div>
+                      <span className="friend-username">{friend.username}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="no-friends">No friends yet.</p>
+            )}
+          </div>
+
+          <div className="social-links-section">
+            <h2>Social Media Links</h2>
+            <form onSubmit={handleSocialLinksSubmit}>
+              {Object.entries(socialLinks).map(([platform, url]) => (
+                <div key={platform} className="social-link-input">
+                  <label htmlFor={platform}>
+                    {platform === 'twitter' && <FaTwitter />}
+                    {platform === 'linkedin' && <FaLinkedin />}
+                    {platform === 'github' && <FaGithub />}
+                  </label>
+                  <input
+                    type="url"
+                    id={platform}
+                    name={platform}
+                    value={url}
+                    onChange={handleSocialLinkChange}
+                    placeholder={`Enter your ${platform} profile URL`}
+                  />
+                </div>
               ))}
-            </ul>
-          ) : (
-            <p className="no-friends">No friends yet.</p>
-          )}
+              <div className="update-social-links-btn-container">
+                <button type="submit" className="update-social-links-btn">Update Social Links</button>
+              </div>
+            </form>
+          </div>
         </div>
 
         <div className="posts-section">
           <h2>Success Stories</h2>
           {user.posts && user.posts.length > 0 ? (
-            <ul className="posts-list">
+            <div className="posts-list">
               {user.posts.map((post) => (
-                <li key={post._id} className="post-item">
+                <div key={post._id} className="post-item">
                   <Link to={`/post/${post._id}`} className="post-link">
                     <p className="post-description">{post.description}</p>
                     <span className="post-date">{post.createdAt}</span>
@@ -112,9 +190,9 @@ const ProfilePage = () => {
                   <button className="delete-post-btn">
                     <FaTrash /> Delete
                   </button>
-                </li>
+                </div>
               ))}
-            </ul>
+            </div>
           ) : (
             <p className="no-posts">No success stories yet.</p>
           )}

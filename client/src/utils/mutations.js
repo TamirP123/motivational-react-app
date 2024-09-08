@@ -134,3 +134,17 @@ export const REMOVE_FRIEND = gql`
     }
   }
 `;
+
+export const UPDATE_SOCIAL_LINKS = gql`
+  mutation UpdateSocialLinks($input: SocialLinksInput!) {
+    updateSocialLinks(input: $input) {
+      _id
+      username
+      socialLinks {
+        twitter
+        linkedin
+        github
+      }
+    }
+  }
+`;

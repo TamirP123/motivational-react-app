@@ -42,6 +42,11 @@ const userSchema = new Schema({
       ref: "User",
     },
   ],
+  socialLinks: {
+    twitter: String,
+    linkedin: String,
+    github: String
+  },
 });
 
 userSchema.pre("save", async function (next) {

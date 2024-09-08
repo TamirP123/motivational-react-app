@@ -28,6 +28,11 @@ export const QUERY_USER = gql`
         _id
         username
       }
+      socialLinks {
+        twitter
+        linkedin
+        github
+      }
     }
   }
 `;
@@ -89,6 +94,12 @@ export const QUERY_ME = gql`
       friends {
         _id
         username
+        profileImage
+      }
+      socialLinks {
+        twitter
+        linkedin
+        github
       }
     }
   }

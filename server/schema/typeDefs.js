@@ -8,6 +8,7 @@ type User {
   posts: [Post]
   friendRequests: [FriendRequest]
   friends: [User]
+  socialLinks: SocialLinks
 }
 
 type FriendRequest {
@@ -58,6 +59,19 @@ type Mutation {
   sendFriendRequest(receiverId: ID!): FriendRequest
   respondFriendRequest(requestId: ID!, status: String!): FriendRequest
   removeFriend(friendId: ID!): User
+  updateSocialLinks(input: SocialLinksInput!): User
+}
+
+type SocialLinks {
+  twitter: String
+  linkedin: String
+  github: String
+}
+
+input SocialLinksInput {
+  twitter: String
+  linkedin: String
+  github: String
 }
 `;
 

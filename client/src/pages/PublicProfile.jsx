@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { useParams, Link, useNavigate } from "react-router-dom";
+
 import { QUERY_USER, QUERY_ME } from "../utils/queries";
 import { SEND_FRIEND_REQUEST, REMOVE_FRIEND } from "../utils/mutations";
 import {
@@ -169,6 +170,33 @@ const PublicProfile = () => {
     }
   };
 
+  const renderSocialIcons = () => {
+    const socialIcons = [
+      { icon: FaTwitter, key: 'twitter' },
+      { icon: FaLinkedin, key: 'linkedin' },
+      { icon: FaGithub, key: 'github' },
+    ];
+
+    return (
+      <div className="social-icons-container">
+        {socialIcons.map(({ icon: Icon, key }) => (
+          user.socialLinks && user.socialLinks[key] ? (
+            <a
+              key={key}
+              href={user.socialLinks[key]}
+              className="social-icon"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={key}
+            >
+              <Icon />
+            </a>
+          ) : null
+        ))}
+      </div>
+    );
+  };
+
   if (loading) return <div className="public-profile">Loading...</div>;
   if (error)
     return <div className="public-profile">Error: {error.message}</div>;
@@ -213,17 +241,7 @@ const PublicProfile = () => {
           </div>
         </div>
         {renderRelationshipButton()}
-        <div className="social-icons">
-          <a href="#" className="social-icon" aria-label="Twitter">
-            <FaTwitter />
-          </a>
-          <a href="#" className="social-icon" aria-label="LinkedIn">
-            <FaLinkedin />
-          </a>
-          <a href="#" className="social-icon" aria-label="GitHub">
-            <FaGithub />
-          </a>
-        </div>
+        {renderSocialIcons()}
       </div>
       <div className="posts-section">
         <h3 className="posts-title">Success Stories</h3>

@@ -326,3 +326,32 @@
     padding: 20px;
   }
 }
+
+.social-icons-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.social-icon {
+  font-size: 24px;
+  color: #ff8c00;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon:hover {
+  color: #ffa333;
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .social-icons-container {
+    gap: 10px;
+  }
+
+  .social-icon {
+    font-size: 20px;
+  }
+}
