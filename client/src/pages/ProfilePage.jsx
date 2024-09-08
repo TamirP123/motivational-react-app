@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
 import { UPDATE_PROFILE_IMAGE } from "../utils/mutations";
@@ -9,6 +9,11 @@ import "../styles/ProfilePage.css";
 import CloudinaryUploadWidget from "../components/CloudinaryUploadWidget";
 
 const ProfilePage = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const { loading, data, refetch } = useQuery(QUERY_ME);
   const [updateProfileImage] = useMutation(UPDATE_PROFILE_IMAGE);
   const user = data?.me || {};

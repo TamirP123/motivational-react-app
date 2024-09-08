@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_SINGLE_POST } from "../utils/queries";
@@ -8,6 +8,11 @@ import { FaUser, FaArrowLeft } from "react-icons/fa";
 import "../styles/Post.css";
 
 const Post = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const { postId } = useParams();
   const [commentText, setCommentText] = useState("");
 

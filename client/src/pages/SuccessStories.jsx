@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_POSTS } from "../utils/queries";
@@ -8,6 +8,11 @@ import { FaUser } from "react-icons/fa";
 import "../styles/SuccessStories.css";
 
 const SuccessStories = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [description, setDescription] = useState("");
   const { loading, data, refetch } = useQuery(QUERY_POSTS);
   const [addPost] = useMutation(ADD_POST, {

@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FaRocket, FaUsers, FaTrophy, FaLightbulb, FaChartLine, FaShieldAlt, FaGlobe } from 'react-icons/fa';
 import '../styles/AboutPage.css';
 
 const AboutPage = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="about-container">
       <section className="stay-motivated-hero">

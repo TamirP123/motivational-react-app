@@ -37,6 +37,8 @@ const PublicProfile = () => {
   const [removeFriend] = useMutation(REMOVE_FRIEND);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+    
     if (data?.user && userData?.me) {
       updateRelationshipStatus();
     }
