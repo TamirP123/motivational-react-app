@@ -286,12 +286,12 @@ const resolvers = {
     },
     updateSocialLinks: async (parent, { input }, context) => {
       if (!context.user) {
-        throw new AuthenticationError('You need to be logged in!');
+        throw new AuthenticationError("You need to be logged in!");
       }
 
       try {
-        console.log('Updating social links for user:', context.user._id);
-        console.log('Input:', input);
+        console.log("Updating social links for user:", context.user._id);
+        console.log("Input:", input);
 
         const updatedUser = await User.findByIdAndUpdate(
           context.user._id,
@@ -300,15 +300,15 @@ const resolvers = {
         );
 
         if (!updatedUser) {
-          console.error('User not found:', context.user._id);
-          throw new Error('User not found');
+          console.error("User not found:", context.user._id);
+          throw new Error("User not found");
         }
 
-        console.log('Updated user:', updatedUser);
+        console.log("Updated user:", updatedUser);
         return updatedUser;
       } catch (err) {
-        console.error('Error updating social links:', err);
-        throw new Error('Failed to update social links');
+        console.error("Error updating social links:", err);
+        throw new Error("Failed to update social links");
       }
     },
   },

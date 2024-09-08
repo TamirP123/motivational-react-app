@@ -2,9 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
 import { UPDATE_PROFILE_IMAGE, UPDATE_SOCIAL_LINKS } from "../utils/mutations";
+import { validateSocialLink } from "../utils/validateSocialLinks";
 import Auth from "../utils/auth";
 import { Link } from "react-router-dom";
-import { FaUser, FaEdit, FaTrash, FaTwitter, FaLinkedin, FaGithub } from "react-icons/fa";
+import {
+  FaUser,
+  FaEdit,
+  FaTrash,
+  FaTwitter,
+  FaLinkedin,
+  FaGithub,
+} from "react-icons/fa";
 import "../styles/ProfilePage.css";
 import CloudinaryUploadWidget from "../components/CloudinaryUploadWidget";
 
@@ -23,6 +31,11 @@ const ProfilePage = () => {
   const [updateSocialLinks] = useMutation(UPDATE_SOCIAL_LINKS);
   const user = data?.me || {};
   const [notification, setNotification] = useState(null);
+  const [socialLinkErrors, setSocialLinkErrors] = useState({
+    twitter: "",
+    linkedin: "",
+    github: "",
+  });
 
   const handleImageUpload = async (imageUrl) => {
     try {
@@ -48,28 +61,54 @@ const ProfilePage = () => {
   const handleSocialLinkChange = (e) => {
     const { name, value } = e.target;
     setSocialLinks((prev) => ({ ...prev, [name]: value }));
+    
+    // Validate the link
+    if (!validateSocialLink(name, value)) {
+      setSocialLinkErrors((prev) => ({ ...prev, [name]: `Invalid ${name} URL` }));
+    } else {
+      setSocialLinkErrors((prev) => ({ ...prev, [name]: "" }));
+    }
   };
 
   const handleSocialLinksSubmit = async (e) => {
     e.preventDefault();
+    
+    // Check if there are any errors
+    if (Object.values(socialLinkErrors).some(error => error !== "")) {
+      setNotification({ type: 'error', message: 'Please correct the errors before submitting.' });
+      return;
+    }
+
     console.log("Submitting social links:", socialLinks);
     try {
-      const { data } = await updateSocialLinks({ 
+      const { data } = await updateSocialLinks({
         variables: { input: socialLinks },
       });
       if (data && data.updateSocialLinks) {
-        console.log("Social links updated successfully:", data.updateSocialLinks);
-        setNotification({ type: 'success', message: 'Social links updated successfully!' });
+        console.log(
+          "Social links updated successfully:",
+          data.updateSocialLinks
+        );
+        setNotification({
+          type: "success",
+          message: "Social links updated successfully!",
+        });
         setTimeout(() => setNotification(null), 3000); // Clear notification after 3 seconds
         refetch();
       } else {
         console.error("Unexpected response structure:", data);
-        setNotification({ type: 'error', message: 'Failed to update social links. Please try again.' });
+        setNotification({
+          type: "error",
+          message: "Failed to update social links. Please try again.",
+        });
         setTimeout(() => setNotification(null), 3000);
       }
     } catch (err) {
       console.error("Error updating social links:", err);
-      setNotification({ type: 'error', message: 'Failed to update social links. Please try again.' });
+      setNotification({
+        type: "error",
+        message: "Failed to update social links. Please try again.",
+      });
       setTimeout(() => setNotification(null), 3000);
     }
   };
@@ -126,7 +165,7 @@ const ProfilePage = () => {
               <ul className="friends-list">
                 {user.friends.map((friend) => (
                   <li key={friend._id} className="friend-item">
-                    <Link to={`/profile/${friend.username}`}>
+                    <Link to={`/profile/${friend.username}`} className="friend-link">
                       <div className="friend-image-container">
                         {friend.profileImage ? (
                           <img
@@ -156,22 +195,33 @@ const ProfilePage = () => {
               {Object.entries(socialLinks).map(([platform, url]) => (
                 <div key={platform} className="social-link-input">
                   <label htmlFor={platform}>
-                    {platform === 'twitter' && <FaTwitter />}
-                    {platform === 'linkedin' && <FaLinkedin />}
-                    {platform === 'github' && <FaGithub />}
+                    {platform === "twitter" && <FaTwitter />}
+                    {platform === "linkedin" && <FaLinkedin />}
+                    {platform === "github" && <FaGithub />}
                   </label>
-                  <input
-                    type="url"
-                    id={platform}
-                    name={platform}
-                    value={url}
-                    onChange={handleSocialLinkChange}
-                    placeholder={`Enter your ${platform} profile URL`}
-                  />
+                  <div className="input-wrapper">
+                    <input
+                      type="url"
+                      id={platform}
+                      name={platform}
+                      value={url}
+                      onChange={handleSocialLinkChange}
+                      placeholder={`Enter your ${platform} profile URL`}
+                      className={socialLinkErrors[platform] ? "input-error" : ""}
+                    />
+                    {socialLinkErrors[platform] && (
+                      <div className="error-message">
+                        <span className="error-icon">!</span>
+                        {socialLinkErrors[platform]}
+                      </div>
+                    )}
+                  </div>
                 </div>
               ))}
               <div className="update-social-links-btn-container">
-                <button type="submit" className="update-social-links-btn">Update Social Links</button>
+                <button type="submit" className="update-social-links-btn">
+                  Update Social Links
+                </button>
               </div>
             </form>
           </div>
@@ -180,7 +230,7 @@ const ProfilePage = () => {
         <div className="posts-section">
           <h2>Success Stories</h2>
           {user.posts && user.posts.length > 0 ? (
-            <div className="posts-list">
+            <div className="posts-container">
               {user.posts.map((post) => (
                 <div key={post._id} className="post-item">
                   <Link to={`/post/${post._id}`} className="post-link">

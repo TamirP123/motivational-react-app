@@ -1,4 +1,4 @@
-export const validateSocialLinks = (platform, url) => {
+export const validateSocialLink = (platform, url) => {
   if (!url) return true; // Allow empty links
 
   const patterns = {

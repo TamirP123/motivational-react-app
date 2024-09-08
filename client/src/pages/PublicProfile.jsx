@@ -245,18 +245,20 @@ const PublicProfile = () => {
       </div>
       <div className="posts-section">
         <h3 className="posts-title">Success Stories</h3>
-        {user.posts && user.posts.length > 0 ? (
-          user.posts.map((post) => (
-            <div key={post._id} className="post-item">
-              <Link to={`/post/${post._id}`} className="post-link">
-                <p className="post-description">{post.description}</p>
-                <p className="post-date">{post.createdAt}</p>
-              </Link>
-            </div>
-          ))
-        ) : (
-          <p className="no-posts">No success stories yet.</p>
-        )}
+        <div className="posts-container">
+          {user.posts && user.posts.length > 0 ? (
+            user.posts.map((post) => (
+              <div key={post._id} className="post-item">
+                <Link to={`/post/${post._id}`} className="post-link">
+                  <p className="post-description">{post.description}</p>
+                  <p className="post-date">{post.createdAt}</p>
+                </Link>
+              </div>
+            ))
+          ) : (
+            <p className="no-posts">No success stories yet.</p>
+          )}
+        </div>
       </div>
     </div>
   );
