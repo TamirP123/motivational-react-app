@@ -230,9 +230,7 @@ const PublicProfile = () => {
             <div key={post._id} className="post-item">
               <Link to={`/post/${post._id}`} className="post-link">
                 <p className="post-description">{post.description}</p>
-                <p className="post-date">
-                  {new Date(parseInt(post.createdAt)).toLocaleString()}
-                </p>
+                <p className="post-date">{post.createdAt}</p>
               </Link>
             </div>
           ))

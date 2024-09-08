@@ -102,9 +102,7 @@ const ProfilePage = () => {
                 <li key={post._id} className="post-item">
                   <Link to={`/post/${post._id}`} className="post-link">
                     <p className="post-description">{post.description}</p>
-                    <span className="post-date">
-                      {new Date(parseInt(post.createdAt)).toLocaleDateString()}
-                    </span>
+                    <span className="post-date">{post.createdAt}</span>
                   </Link>
                   <button className="delete-post-btn">
                     <FaTrash /> Delete

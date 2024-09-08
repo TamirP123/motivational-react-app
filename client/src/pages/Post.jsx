@@ -63,7 +63,10 @@ const Post = () => {
       <div className="post-content">
         <div className="post-header">
           <div className="post-author-info">
-            <Link to={`/profile/${post.postAuthor?.username}`} className="author-link">
+            <Link
+              to={`/profile/${post.postAuthor?.username}`}
+              className="author-link"
+            >
               {post.postAuthor?.profileImage ? (
                 <img
                   src={post.postAuthor.profileImage}
@@ -78,7 +81,10 @@ const Post = () => {
               <div className="profile-hover-notification">View Profile</div>
             </Link>
             <div className="author-details">
-              <Link to={`/profile/${post.postAuthor?.username}`} className="author-link">
+              <Link
+                to={`/profile/${post.postAuthor?.username}`}
+                className="author-link"
+              >
                 <h2>
                   {post.postAuthor?.username || "Unknown User"}'s Success Story
                 </h2>

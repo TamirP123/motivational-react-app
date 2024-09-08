@@ -28,7 +28,7 @@ const userSchema = new Schema({
   ],
   profileImage: {
     type: String,
-    default: "https://example.com/default-profile-image.jpg",
+    default: "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-social-media-user-vector-image-icon-default-avatar-profile-icon-social-media-user-vector-image-209162840.jpg",
   },
   friendRequests: [
     {
