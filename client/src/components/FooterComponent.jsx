@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaGithub } from 'react-icons/fa';
 
 const FooterComponent = () => {
@@ -41,9 +42,9 @@ const FooterComponent = () => {
               <li>✓ Connect with like-minded achievers</li>
               <li>✓ Receive daily motivational insights</li>
             </ul>
-            <button className='btn btn-lg' style={{backgroundColor: '#ff8c00', color: '#1a1a1a'}}>
+            <Link to="/signup" className='btn btn-lg' style={{backgroundColor: '#ff8c00', color: '#1a1a1a'}}>
               Become a Member
-            </button>
+            </Link>
           </div>
         </div>
       </div>

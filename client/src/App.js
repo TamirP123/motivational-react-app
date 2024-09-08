@@ -1,26 +1,32 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ProfilePage from './pages/ProfilePage';
-import PublicProfile from './pages/PublicProfile';
-import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ProfilePage from "./pages/ProfilePage";
+import PublicProfile from "./pages/PublicProfile";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import SignupPage from './pages/SignupPage';
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: "/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('id_token');
+  const token = localStorage.getItem("id_token");
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
-    }
-  }
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  };
 });
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
 });
 
 function App() {
@@ -29,11 +35,14 @@ function App() {
       <Router>
         <Routes>
           {/* ... other routes */}
-          <Route 
-            path="/profile" 
-            element={Auth.loggedIn() ? <ProfilePage /> : <Navigate to="/login" />} 
+          <Route
+            path="/profile"
+            element={
+              Auth.loggedIn() ? <ProfilePage /> : <Navigate to="/login" />
+            }
           />
           <Route path="/profile/:username" element={<PublicProfile />} />
+          <Route path="/signup" element={<SignupPage />} />
         </Routes>
       </Router>
     </ApolloProvider>

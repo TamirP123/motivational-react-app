@@ -3,7 +3,15 @@ import { useQuery, useMutation } from "@apollo/client";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { QUERY_USER, QUERY_ME } from "../utils/queries";
 import { SEND_FRIEND_REQUEST, REMOVE_FRIEND } from "../utils/mutations";
-import { FaUser, FaArrowLeft, FaUserPlus, FaUserMinus, FaTwitter, FaLinkedin, FaGithub } from "react-icons/fa";
+import {
+  FaUser,
+  FaArrowLeft,
+  FaUserPlus,
+  FaUserMinus,
+  FaTwitter,
+  FaLinkedin,
+  FaGithub,
+} from "react-icons/fa";
 import Auth from "../utils/auth";
 import "../styles/PublicProfile.css";
 
@@ -15,14 +23,14 @@ const PublicProfile = () => {
 
   const { loading, data, error, refetch } = useQuery(QUERY_USER, {
     variables: { username: userParam },
-    fetchPolicy: "network-only", 
+    fetchPolicy: "network-only",
     onError: (error) => {
       console.error("GraphQL error:", error);
     },
   });
 
   const { data: userData, refetch: refetchMe } = useQuery(QUERY_ME, {
-    fetchPolicy: "network-only", 
+    fetchPolicy: "network-only",
   });
 
   const [sendFriendRequest] = useMutation(SEND_FRIEND_REQUEST);
@@ -41,7 +49,9 @@ const PublicProfile = () => {
     const profileUser = data.user;
 
     // Check if they are already friends
-    const isFriend = currentUser.friends?.some(friend => friend._id === profileUser._id);
+    const isFriend = currentUser.friends?.some(
+      (friend) => friend._id === profileUser._id
+    );
     if (isFriend) {
       setRelationshipStatus("friends");
       return;
@@ -49,9 +59,11 @@ const PublicProfile = () => {
 
     // Check for pending friend requests
     const pendingRequest = profileUser.friendRequests?.find(
-      request => 
-        (request.sender._id === currentUser._id && request.receiver._id === profileUser._id) ||
-        (request.sender._id === profileUser._id && request.receiver._id === currentUser._id)
+      (request) =>
+        (request.sender._id === currentUser._id &&
+          request.receiver._id === profileUser._id) ||
+        (request.sender._id === profileUser._id &&
+          request.receiver._id === currentUser._id)
     );
 
     if (pendingRequest) {
@@ -68,7 +80,10 @@ const PublicProfile = () => {
 
   const handleSendFriendRequest = async () => {
     if (!Auth.loggedIn()) {
-      showNotification("You must be logged in to send a friend request.", "error");
+      showNotification(
+        "You must be logged in to send a friend request.",
+        "error"
+      );
       return;
     }
 
@@ -86,7 +101,10 @@ const PublicProfile = () => {
         showNotification("Friend request already sent!", "info");
         setRelationshipStatus("pending");
       } else {
-        showNotification("Failed to send friend request. Please try again.", "error");
+        showNotification(
+          "Failed to send friend request. Please try again.",
+          "error"
+        );
       }
     }
   };
@@ -112,22 +130,35 @@ const PublicProfile = () => {
   };
 
   const renderRelationshipButton = () => {
-    if (!Auth.loggedIn() || Auth.getProfile().authenticatedPerson._id === data.user._id) {
+    if (
+      !Auth.loggedIn() ||
+      Auth.getProfile().authenticatedPerson._id === data.user._id
+    ) {
       return null;
     }
 
     switch (relationshipStatus) {
       case "friends":
         return (
-          <button onClick={handleRemoveFriend} className="friend-request-button remove-friend">
+          <button
+            onClick={handleRemoveFriend}
+            className="friend-request-button remove-friend"
+          >
             <FaUserMinus /> Remove Friend
           </button>
         );
       case "pending":
-        return <button className="friend-request-button" disabled>Request Pending</button>;
+        return (
+          <button className="friend-request-button" disabled>
+            Request Pending
+          </button>
+        );
       case "not_friends":
         return (
-          <button onClick={handleSendFriendRequest} className="friend-request-button add-friend">
+          <button
+            onClick={handleSendFriendRequest}
+            className="friend-request-button add-friend"
+          >
             <FaUserPlus /> Send Friend Request
           </button>
         );
@@ -137,8 +168,10 @@ const PublicProfile = () => {
   };
 
   if (loading) return <div className="public-profile">Loading...</div>;
-  if (error) return <div className="public-profile">Error: {error.message}</div>;
-  if (!data || !data.user) return <div className="public-profile">User not found</div>;
+  if (error)
+    return <div className="public-profile">Error: {error.message}</div>;
+  if (!data || !data.user)
+    return <div className="public-profile">User not found</div>;
 
   const user = data.user;
 
@@ -179,9 +212,15 @@ const PublicProfile = () => {
         </div>
         {renderRelationshipButton()}
         <div className="social-icons">
-          <a href="#" className="social-icon" aria-label="Twitter"><FaTwitter /></a>
-          <a href="#" className="social-icon" aria-label="LinkedIn"><FaLinkedin /></a>
-          <a href="#" className="social-icon" aria-label="GitHub"><FaGithub /></a>
+          <a href="#" className="social-icon" aria-label="Twitter">
+            <FaTwitter />
+          </a>
+          <a href="#" className="social-icon" aria-label="LinkedIn">
+            <FaLinkedin />
+          </a>
+          <a href="#" className="social-icon" aria-label="GitHub">
+            <FaGithub />
+          </a>
         </div>
       </div>
       <div className="posts-section">

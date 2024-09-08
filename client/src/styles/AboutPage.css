@@ -1,0 +1,394 @@
+/* Add these styles at the top of the file */
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.stay-motivated-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.hero-content {
+  max-width: 800px;
+  width: 100%;
+}
+
+.motivation-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.motivation-card {
+  flex: 1;
+  min-width: 250px;
+  max-width: 300px;
+}
+
+.about-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 0;
+}
+
+.section-content {
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+}
+
+.features-grid,
+.why-stay-motivated-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  justify-content: center;
+}
+
+body {
+  background-color: #141414;
+  color: #ffffff;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.stay-motivated-hero {
+  background: linear-gradient(rgba(20, 20, 20, 0.8), rgba(20, 20, 20, 0.8)), url('/path/to/motivational-image.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 6rem 0;
+  text-align: center;
+  color: #ffffff;
+}
+
+.stay-motivated-hero h1 {
+  font-size: 4rem;
+  color: #ff6600;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.stay-motivated-hero p {
+  font-size: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.motivation-cards {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.motivation-card {
+  background-color: rgba(255, 102, 0, 0.1);
+  border: 2px solid #ff6600;
+  border-radius: 10px;
+  padding: 1.5rem;
+  width: 250px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.motivation-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(255, 102, 0, 0.2);
+}
+
+.motivation-card h3 {
+  color: #ff6600;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.motivation-card p {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.about-container {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.about-hero {
+  background: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.7)), url('/path/to/hero-image.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  max-width: 800px;
+  padding: 0 20px;
+  z-index: 2;
+}
+
+.hero-content h1 {
+  font-size: 4.5rem;
+  margin-bottom: 1rem;
+  color: #ff6600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  animation: fadeInUp 1s ease-out;
+}
+
+.hero-content p {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  animation: fadeInUp 1s ease-out 0.5s;
+  animation-fill-mode: both;
+}
+
+.about-section {
+  padding: 6rem 0;
+}
+
+.mission {
+  background-color: #1f1f1f;
+  position: relative;
+  overflow: hidden;
+}
+
+.mission::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(255, 102, 0, 0.1) 0%, rgba(255, 102, 0, 0) 100%);
+  z-index: 1;
+}
+
+.section-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.mission h2 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  color: #ff6600;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.mission p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #ff6600;
+  text-align: center;
+}
+
+.features-grid, .testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.feature-item {
+  background-color: #1f1f1f;
+  padding: 2rem;
+  border-radius: 4px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(255, 102, 0, 0.1);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  color: #ff6600;
+  margin-bottom: 1rem;
+}
+
+.feature-item h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #ff6600;
+}
+
+.testimonial-card {
+  background-color: #1f1f1f;
+  padding: 2rem;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.testimonial-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  object-fit: cover;
+}
+
+blockquote {
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+cite {
+  font-weight: bold;
+  color: #ff6600;
+}
+
+.cta {
+  background-color: #ff6600;
+  text-align: center;
+}
+
+.cta h2, .cta p {
+  color: #ffffff;
+}
+
+.cta-button {
+  background-color: #ffffff;
+  color: #ff6600;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 1rem;
+}
+
+.cta-button:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 3rem;
+  }
+  
+  .hero-content p {
+    font-size: 1.4rem;
+  }
+  
+  .mission h2 {
+    font-size: 2.5rem;
+  }
+  
+  .mission p {
+    font-size: 1.1rem;
+  }
+  
+  .stay-motivated-hero h1 {
+    font-size: 3rem;
+  }
+  
+  .stay-motivated-hero p {
+    font-size: 1.2rem;
+  }
+  
+  .motivation-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .motivation-card {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.why-stay-motivated {
+  background-color: #1f1f1f;
+  position: relative;
+  overflow: hidden;
+}
+
+.why-stay-motivated::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(255, 102, 0, 0.05) 0%, rgba(255, 102, 0, 0) 100%);
+  z-index: 1;
+}
+
+.why-stay-motivated-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.why-stay-motivated-item {
+  background-color: #2a2a2a;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.why-stay-motivated-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(255, 102, 0, 0.1);
+}
+
+.why-stay-motivated-icon {
+  font-size: 3rem;
+  color: #ff6600;
+  margin-bottom: 1rem;
+}
+
+.why-stay-motivated-item h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #ff6600;
+}
+
+.why-stay-motivated-item p {
+  font-size: 1rem;
+  line-height: 1.6;
+}

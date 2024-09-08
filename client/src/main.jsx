@@ -16,6 +16,8 @@ import SuccessStories from './pages/SuccessStories.jsx';
 import Post from './pages/Post.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 import PublicProfile from './pages/PublicProfile.jsx';
+import AboutPage from './pages/AboutPage.jsx';
+import ContactPage from './pages/ContactPage.jsx';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -64,6 +66,14 @@ const router = createBrowserRouter([
         path: '/profile/:username',
         element: <PublicProfile />
       },
+      {
+        path: '/about',
+        element: <AboutPage />
+      },
+      {
+        path: '/contact',
+        element: <ContactPage />
+      }
     ]
   }
 ])
