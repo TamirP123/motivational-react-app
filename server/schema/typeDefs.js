@@ -60,6 +60,7 @@ type Mutation {
   respondFriendRequest(requestId: ID!, status: String!): FriendRequest
   removeFriend(friendId: ID!): User
   updateSocialLinks(input: SocialLinksInput!): User
+  cancelFriendRequest(receiverId: ID!): User
 }
 
 type SocialLinks {

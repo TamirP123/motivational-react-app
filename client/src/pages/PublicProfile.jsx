@@ -3,7 +3,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import { useParams, Link, useNavigate } from "react-router-dom";
 
 import { QUERY_USER, QUERY_ME } from "../utils/queries";
-import { SEND_FRIEND_REQUEST, REMOVE_FRIEND } from "../utils/mutations";
+import { SEND_FRIEND_REQUEST, REMOVE_FRIEND, CANCEL_FRIEND_REQUEST } from "../utils/mutations";
 import {
   FaUser,
   FaArrowLeft,
@@ -12,6 +12,7 @@ import {
   FaTwitter,
   FaLinkedin,
   FaGithub,
+  FaTimes,
 } from "react-icons/fa";
 import Auth from "../utils/auth";
 import "../styles/PublicProfile.css";
@@ -36,6 +37,7 @@ const PublicProfile = () => {
 
   const [sendFriendRequest] = useMutation(SEND_FRIEND_REQUEST);
   const [removeFriend] = useMutation(REMOVE_FRIEND);
+  const [cancelFriendRequest] = useMutation(CANCEL_FRIEND_REQUEST);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -64,9 +66,11 @@ const PublicProfile = () => {
     const pendingRequest = profileUser.friendRequests?.find(
       (request) =>
         (request.sender._id === currentUser._id &&
-          request.receiver._id === profileUser._id) ||
+          request.receiver._id === profileUser._id &&
+          request.status === "pending") ||
         (request.sender._id === profileUser._id &&
-          request.receiver._id === currentUser._id)
+          request.receiver._id === currentUser._id &&
+          request.status === "pending")
     );
 
     if (pendingRequest) {
@@ -132,6 +136,26 @@ const PublicProfile = () => {
     }
   };
 
+  const handleCancelFriendRequest = async () => {
+    if (!Auth.loggedIn()) {
+      showNotification("You must be logged in to cancel a friend request.", "error");
+      return;
+    }
+
+    try {
+      await cancelFriendRequest({
+        variables: { receiverId: data.user._id },
+      });
+      setRelationshipStatus("not_friends");
+      showNotification("Friend request cancelled successfully!");
+      await refetch();
+      await refetchMe();
+    } catch (err) {
+      console.error("Error cancelling friend request:", err);
+      showNotification("Failed to cancel friend request. Please try again.", "error");
+    }
+  };
+
   const renderRelationshipButton = () => {
     if (
       !Auth.loggedIn() ||
@@ -152,9 +176,17 @@ const PublicProfile = () => {
         );
       case "pending":
         return (
-          <button className="friend-request-button" disabled>
-            Request Pending
-          </button>
+          <>
+            <button className="friend-request-button" disabled>
+              Request Pending
+            </button>
+            <button
+              onClick={handleCancelFriendRequest}
+              className="friend-request-button cancel-request"
+            >
+              <FaTimes /> Cancel Request
+            </button>
+          </>
         );
       case "not_friends":
         return (

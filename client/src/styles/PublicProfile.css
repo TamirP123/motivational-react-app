@@ -159,6 +159,15 @@
   cursor: not-allowed;
 }
 
+.friend-request-button.cancel-request {
+  background-color: #f44336;
+  margin-left: 10px;
+}
+
+.friend-request-button.cancel-request:hover {
+  background-color: #d32f2f;
+}
+
 .social-icons {
   display: flex;
   justify-content: center;

@@ -148,3 +148,12 @@ export const UPDATE_SOCIAL_LINKS = gql`
     }
   }
 `;
+
+export const CANCEL_FRIEND_REQUEST = gql`
+  mutation cancelFriendRequest($receiverId: ID!) {
+    cancelFriendRequest(receiverId: $receiverId) {
+      _id
+      username
+    }
+  }
+`;

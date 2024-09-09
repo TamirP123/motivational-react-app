@@ -311,6 +311,36 @@ const resolvers = {
         throw new Error("Failed to update social links");
       }
     },
+    cancelFriendRequest: async (parent, { receiverId }, context) => {
+      if (context.user) {
+        try {
+          // Find and remove the friend request
+          const removedRequest = await FriendRequest.findOneAndDelete({
+            sender: context.user._id,
+            receiver: receiverId,
+            status: "pending"
+          });
+
+          if (!removedRequest) {
+            throw new Error("Friend request not found");
+          }
+
+          // Remove the friend request from both users' friendRequests arrays
+          await User.findByIdAndUpdate(context.user._id, {
+            $pull: { friendRequests: removedRequest._id }
+          });
+          await User.findByIdAndUpdate(receiverId, {
+            $pull: { friendRequests: removedRequest._id }
+          });
+
+          return User.findById(context.user._id);
+        } catch (error) {
+          console.error("Error in cancelFriendRequest resolver:", error);
+          throw new Error(error.message);
+        }
+      }
+      throw new AuthenticationError("Not logged in");
+    },
   },
 };
 
