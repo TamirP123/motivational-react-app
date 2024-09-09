@@ -28,7 +28,8 @@ const userSchema = new Schema({
   ],
   profileImage: {
     type: String,
-    default: "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-social-media-user-vector-image-icon-default-avatar-profile-icon-social-media-user-vector-image-209162840.jpg",
+    default:
+      "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-social-media-user-vector-image-icon-default-avatar-profile-icon-social-media-user-vector-image-209162840.jpg",
   },
   friendRequests: [
     {
@@ -45,7 +46,7 @@ const userSchema = new Schema({
   socialLinks: {
     twitter: String,
     linkedin: String,
-    github: String
+    github: String,
   },
 });
 

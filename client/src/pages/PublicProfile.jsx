@@ -39,7 +39,7 @@ const PublicProfile = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    
+
     if (data?.user && userData?.me) {
       updateRelationshipStatus();
     }
@@ -172,14 +172,14 @@ const PublicProfile = () => {
 
   const renderSocialIcons = () => {
     const socialIcons = [
-      { icon: FaTwitter, key: 'twitter' },
-      { icon: FaLinkedin, key: 'linkedin' },
-      { icon: FaGithub, key: 'github' },
+      { icon: FaTwitter, key: "twitter" },
+      { icon: FaLinkedin, key: "linkedin" },
+      { icon: FaGithub, key: "github" },
     ];
 
     return (
       <div className="social-icons-container">
-        {socialIcons.map(({ icon: Icon, key }) => (
+        {socialIcons.map(({ icon: Icon, key }) =>
           user.socialLinks && user.socialLinks[key] ? (
             <a
               key={key}
@@ -192,7 +192,7 @@ const PublicProfile = () => {
               <Icon />
             </a>
           ) : null
-        ))}
+        )}
       </div>
     );
   };
