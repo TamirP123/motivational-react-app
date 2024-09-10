@@ -1,3 +1,7 @@
+const dotenv = require('dotenv');
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config({ path: '../../.env' });
+}
 const express = require("express");
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
