@@ -4,12 +4,12 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server/server.js",
+    "start": "vite preview",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"cd server && npm run watch\" \"cd client && npm run dev\"",
     "seed": "node server/config/seeds.js",
     "install": "cd server && npm i && cd ../client && npm i",
-    "build": "cd client && npm run build",
+    "build": "vite build",
     "render-build": "npm run install && npm run build"
   },
   "keywords": [],
@@ -21,10 +21,14 @@
     "framer-motion": "^11.5.2",
     "react-icons": "^5.3.0",
     "semantic-ui-react": "^2.1.5",
-    "styled-components": "^6.1.13"
+    "styled-components": "^6.1.13",
+    "vite": "^x.x.x"  // Add this line with the appropriate version
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
     "react-scripts": "^5.0.1"
+  },
+  "engines": {
+    "node": "14.x"  // Or whichever version you're using
   }
 }
