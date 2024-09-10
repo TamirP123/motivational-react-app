@@ -8,7 +8,6 @@ import { FaUser } from "react-icons/fa";
 import "../styles/SuccessStories.css";
 
 const SuccessStories = () => {
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
