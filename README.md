@@ -55,11 +55,22 @@ https://stay-motivated-6f12b575dda7.herokuapp.com/
 https://github.com/TamirP123/motivational-react-app
 
 #### Demo of application
+
+## HomePage
 ![Homepage](https://github.com/user-attachments/assets/f2326a71-fdc7-41b3-84e3-e76d1adcb098)
+
+## Success Story
 
 ![Success Story](https://github.com/user-attachments/assets/eab914fe-d4ae-4e38-9e6a-838feac08daf)
 
+## Post interaction
+
 ![User Interaction](https://github.com/user-attachments/assets/28b48b88-b76d-402c-b420-9dd1a32ac61b)
+
+## Profile Viewing
+
+![Profile Viewing](https://github.com/user-attachments/assets/aca28a6d-1293-4cfa-a252-938434a8c79e)
+
 
 
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
