@@ -56,6 +56,9 @@ https://github.com/TamirP123/motivational-react-app
 #### Demo of application
 ![Homepage](https://github.com/user-attachments/assets/f2326a71-fdc7-41b3-84e3-e76d1adcb098)
 
+![Success Story](https://github.com/user-attachments/assets/eab914fe-d4ae-4e38-9e6a-838feac08daf)
+
+
 
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
